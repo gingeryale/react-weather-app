@@ -94,3 +94,16 @@ h2.forecast{
 .faveHeart span:nth-of-type(1){
   font-size: 1.4rem;
 }
+
+.card.fifty1{
+  width: 100%;
+  max-width: 30%;
+}
+
+.card.fifty1 > .card-body{
+  display: flex;
+}
+.card.fifty > .card-body >img{
+  border:1px solid black;
+  padding:1rem;
+}

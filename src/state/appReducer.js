@@ -1,11 +1,11 @@
 const initializeState = {
     city: [
         {
-            userCity: '',
+            userCity: '123',
             city: 'telaviv',
-            WeatherText: '',
-            WeatherIcon: '',
-            Temperature: ''
+            WeatherText: '123',
+            WeatherIcon: '123',
+            Temperature: '123'
         }
     ],
     forecast: [
@@ -17,10 +17,7 @@ const initializeState = {
 const appReducer = (state = initializeState, action) => {
     switch (action.type) {
         case "GET_CITY":
-            debugger;
-            let newState = {
-                ...state
-            };
+            let newState = {...this.state};
             (newState.city = action.data);
             (newState.forecast = state.forecast);
             (newState.favorites = state.favorites);
@@ -38,7 +35,8 @@ const appReducer = (state = initializeState, action) => {
         case "GET_FAVELIST": newState = {
                 ...state
             };
-            (newState.favorites = action.data)return newState;
+            (newState.favorites = action.data);
+            return newState;
         default:
             return state;
     }

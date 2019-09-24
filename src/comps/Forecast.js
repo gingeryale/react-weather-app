@@ -7,7 +7,6 @@ class Forecast extends React.Component {
     render() {
       return (
        <div>
-<h2 className="forecast">Scattered Showers</h2>
  <div className="wrapper">
        <Card />
        <Card />
