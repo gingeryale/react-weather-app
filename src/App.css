@@ -4,6 +4,26 @@ body{
 * div{
   font-size:1rem;
 }
+
+.bar{
+  display: flex;
+}
+.bar > ul{
+  margin-top: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 81vw;
+}
+.bar ul > li{
+  margin-left:1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+span.brand {
+  display: flex;
+  justify-content: flex-start;
+}
 .App {
   text-align: left;
   width:100vw;
@@ -48,8 +68,9 @@ justify-content: start;
 }
 
 .card .weather{
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  flex-direction: row;
 }
 
 main.weatherForm .form{
@@ -73,6 +94,11 @@ main.weatherForm .form{
 .footer{
   display: flex;
   justify-content: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: rgba(white,.5);
+  left: 0;
 }
 
 h2.forecast{
@@ -112,7 +138,7 @@ h2.forecast{
   padding:1rem;
 }
 
-.extForecast{
+.extForecast, .faves{
   display: flex;
   justify-content: space-evenly;
 }

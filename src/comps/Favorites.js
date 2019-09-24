@@ -5,7 +5,7 @@ import Card from './Card';
 class Favorites extends React.Component{
     render(){
         return(
-            <div>
+            <div className="faves">
                 <Card />
                 <Card />
                 <Card />

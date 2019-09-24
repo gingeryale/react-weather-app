@@ -1,5 +1,4 @@
 import React from 'react';
-import Forecast from './Forecast';
 import Weather from './Weather';
 
 

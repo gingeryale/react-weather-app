@@ -1,21 +1,13 @@
 import React, {Component} from 'react';
 import '../App.css';
 import Card from './Card';
-import Moment from 'react-moment';
-
 
 class Weather extends Component {
 
     state = {
         weather:[],
         city:'tel aviv',
-        forecast:[],
-        weatherDev:[{"LocalObservationDateTime":"2019-09-23T14:20:00+03:00",
-        "EpochTime":1569237600,"WeatherText":"Sunny","WeatherIcon":1,"HasPrecipitation":false,
-        "PrecipitationType":null,"IsDayTime":true,"Temperature":{"Metric":
-        {"Value":29.6,"Unit":"C","UnitType":17},"Imperial":{"Value":85.0,"Unit":"F","UnitType":18}}
-            }],
-        forecastDev:[]
+        forecast:[]
     }
 
     componentDidMount() {
@@ -83,39 +75,39 @@ class Weather extends Component {
     }
 
 
-// download all server vacations
-
 
 
 async loadWeather(city) {
     city = this.state.city;
-    let _APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-    
-        let r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
-        let jsonDATA = await r.json();
-        console.log("DATA", jsonDATA[0].Key);
-        let cityKey = jsonDATA[0].Key;
-        let res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
-        let jsonCityData = await res2.json();
-        
-        console.log("DATA", jsonCityData);
-        // var currentWeather = jsonCityData;
-        console.log("DATA this", this);
-        console.log("DATA cityW", jsonCityData);
-        this.setState({ weather : jsonCityData })
-        console.log("DATA final", jsonCityData);
-        let res3 = await fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
-        let jsonForecastData = await res3.json();
-        console.log("DATAForecast", jsonForecastData.DailyForecasts);
-        this.setState({ forecast : jsonForecastData.DailyForecasts });
+    let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let _APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    let EAPIKey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
+    try {
+        var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
+      } catch(err) {
+        alert(err);
+        window.location.reload();
+      }
+        var jsonDATA = await r.json();
+        try {
+        var cityKey = jsonDATA[0].Key;
+        var res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
+        var jsonCityData = await res2.json();
+        this.setState({ weather : jsonCityData });
+        }catch(err){
+            alert(err);
+            window.location.reload();
+        }
 
-
-    
-}
-
-
-
+        try{
+            var res3 = await fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
+            var jsonForecastData = await res3.json();
+            this.setState({ forecast : jsonForecastData.DailyForecasts });   
+        }catch(err){
+            alert(err);
+            window.location.reload();
+        }
+    }
 }
 
 

@@ -4,7 +4,7 @@ import React from 'react';
 function Footer() {
     return (
       <footer className="footer">
-          2019
+         &copy; 2019 | gingeryale
       </footer>
     );
   }

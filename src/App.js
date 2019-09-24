@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Footer from './comps/Footer';
-import AppRouter from './comps/RouterComp';
+import AppRouter from './comps/AppRouter';
 
 
 class App extends React.Component {
@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <div className="container-fluid">
          <AppRouter />
-      <Footer />
+          <Footer />
       </div>
     );
   }
