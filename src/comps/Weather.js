@@ -7,7 +7,8 @@ class Weather extends Component {
     state = {
         weather:[],
         city:'tel aviv',
-        forecast:[]
+        forecast:[],
+        setFavorites:[]
     }
 
     componentDidMount() {
@@ -30,8 +31,8 @@ class Weather extends Component {
                     <button onClick={this.loadWeather.bind(this)}
                         className="btn btn-primary mb-2">Search</button>
                 </div>
-                {this.state.weather.map(CW =>
-                <div> 
+                {this.state.weather.map((CW, i) =>
+                <div key={i}> 
                     <div className="divy2">
                         <div className="card fifty1">
                             <div className="card-body">
@@ -47,7 +48,7 @@ class Weather extends Component {
                         <div className="fifty2">
                             <p className="faveHeart">
                                 <span>&hearts;</span>
-                                <button className="boxy btn btn-outline-danger">Add To Favorites</button>
+                                <button onClick={this.addFave.bind(this, this.state.city)} className="boxy btn btn-outline-danger">Add To Favorites</button>
                             </p>
                         </div>
                 </div>
@@ -72,22 +73,29 @@ class Weather extends Component {
 
     
     handleChange(e) {
-        this.setState({[e.target.name]: e.target.value.toLowerCase().trim()})
+        this.setState({[e.target.name]: e.target.value.toLowerCase().trim()});
     }
 
+
+    addFave(e, city){
+        city = this.state.city;
+        var prevFaveArray = [...this.state.setFavorites];
+        prevFaveArray.push(city);
+        this.setState({ setFavorites: prevFaveArray });
+        localStorage.setItem('Favorites', prevFaveArray);
+    }
 
 
 // fetch data
 async loadWeather(city) {
     city = this.state.city;
-    let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let _WWWAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
     let _APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-    let EAPIKey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
+    let APIkey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
     try {
         var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
       } catch(err) {
-        alert(err);
-        //window.location.reload();
+        alert("Couldn't find that location, please make sure you spelled it correctly");
       }
         var jsonDATA = await r.json();
         try {
@@ -96,8 +104,7 @@ async loadWeather(city) {
         var jsonCityData = await res2.json();
         this.setState({ weather : jsonCityData });
         }catch(err){
-            console.log(err);
-            //window.location.reload();
+            alert("Couldn't find that location, please make sure you spelled it correctly");
         }
 
         try{
@@ -106,7 +113,7 @@ async loadWeather(city) {
             this.setState({ forecast : jsonForecastData.DailyForecasts });   
         }catch(err){
             console.log(err);
-            //window.location.reload();
+            window.location.reload();
         }
     }
 }
