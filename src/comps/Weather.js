@@ -1,26 +1,33 @@
 import React, {Component} from 'react';
 import '../App.css';
+import Card from './Card';
+import Moment from 'react-moment';
 
 
 class Weather extends Component {
 
     state = {
         weather:[],
-        city:'new york',
+        city:'tel aviv',
+        forecast:[],
         weatherDev:[{"LocalObservationDateTime":"2019-09-23T14:20:00+03:00",
         "EpochTime":1569237600,"WeatherText":"Sunny","WeatherIcon":1,"HasPrecipitation":false,
         "PrecipitationType":null,"IsDayTime":true,"Temperature":{"Metric":
         {"Value":29.6,"Unit":"C","UnitType":17},"Imperial":{"Value":85.0,"Unit":"F","UnitType":18}}
             }],
+        forecastDev:[]
     }
 
     componentDidMount() {
         this.loadWeather();
     }
+
     render() {
         var fn = this.state.weather.map(val =>
-           val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
+            val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
+            
         return (
+        <div>
             <div className="cityWeather">
                 <div className="form">
                     <input name="city"
@@ -56,9 +63,18 @@ class Weather extends Component {
                 <h2 className="forecast">{CW.WeatherText}</h2>
                </div>
                </div>
-                )};
+                )}
             </div>
-
+            <div className="extForecast">
+            {this.state.forecast.map((f, i) => 
+                <Card 
+                    key={i} 
+                    day={f.EpochDate} 
+                    temp={f.Temperature.Maximum.Value}
+                    unit={f.Temperature.Maximum.Unit} />
+                )}
+            </div>
+        </div>
         );
     }
 
@@ -82,13 +98,19 @@ async loadWeather(city) {
         let cityKey = jsonDATA[0].Key;
         let res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
         let jsonCityData = await res2.json();
-
+        
         console.log("DATA", jsonCityData);
         // var currentWeather = jsonCityData;
         console.log("DATA this", this);
         console.log("DATA cityW", jsonCityData);
         this.setState({ weather : jsonCityData })
         console.log("DATA final", jsonCityData);
+        let res3 = await fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
+        let jsonForecastData = await res3.json();
+        console.log("DATAForecast", jsonForecastData.DailyForecasts);
+        this.setState({ forecast : jsonForecastData.DailyForecasts });
+
+
     
 }
 

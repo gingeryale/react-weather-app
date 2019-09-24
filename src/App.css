@@ -47,6 +47,10 @@ justify-content: start;
   max-width:22%;
 }
 
+.card .weather{
+  display: flex;
+  justify-content: center;
+}
 
 main.weatherForm .form{
   display: flex;
@@ -106,4 +110,9 @@ h2.forecast{
 .card.fifty > .card-body >img{
   border:1px solid black;
   padding:1rem;
+}
+
+.extForecast{
+  display: flex;
+  justify-content: space-evenly;
 }

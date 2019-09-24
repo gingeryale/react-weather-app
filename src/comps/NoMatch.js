@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function NoMatch({ location }) {
+function NoMatch() {
     return (
       <div className="nomatch">
         <h3>

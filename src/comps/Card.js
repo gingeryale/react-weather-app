@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
+import moment from 'moment';
 
-const card = (props) => (
-    <div className="card">
+class Card extends React.Component {
+  render(){
+    let date = this.props.day;
+     return(
+<div className="card weather">
   <div className="card-body">
-    <h5 className="card-title">DAY</h5>
-    <p className="card-text">38 deg</p>
+    <h5>{moment.unix(date).format('ddd')}</h5>
+    <p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
   </div>
 </div>
-)
+    );
+   
+    
+  }
+
+   
+}
     
 
 
-export default card;
+export default Card;
