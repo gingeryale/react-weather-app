@@ -47,7 +47,7 @@ class Weather extends Component {
                         <div className="fifty2">
                             <p className="faveHeart">
                                 <span>&hearts;</span>
-                                <span className="boxy">Add To Favorites</span>
+                                <button className="boxy btn btn-outline-danger">Add To Favorites</button>
                             </p>
                         </div>
                 </div>
@@ -70,13 +70,14 @@ class Weather extends Component {
         );
     }
 
+    
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value.toLowerCase().trim()})
     }
 
 
 
-
+// fetch data
 async loadWeather(city) {
     city = this.state.city;
     let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
@@ -86,7 +87,7 @@ async loadWeather(city) {
         var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
       } catch(err) {
         alert(err);
-        window.location.reload();
+        //window.location.reload();
       }
         var jsonDATA = await r.json();
         try {
@@ -95,8 +96,8 @@ async loadWeather(city) {
         var jsonCityData = await res2.json();
         this.setState({ weather : jsonCityData });
         }catch(err){
-            alert(err);
-            window.location.reload();
+            console.log(err);
+            //window.location.reload();
         }
 
         try{
@@ -104,8 +105,8 @@ async loadWeather(city) {
             var jsonForecastData = await res3.json();
             this.setState({ forecast : jsonForecastData.DailyForecasts });   
         }catch(err){
-            alert(err);
-            window.location.reload();
+            console.log(err);
+            //window.location.reload();
         }
     }
 }

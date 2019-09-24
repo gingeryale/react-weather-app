@@ -142,3 +142,7 @@ h2.forecast{
   display: flex;
   justify-content: space-evenly;
 }
+
+.btn-primary{
+  height:3rem;
+}

@@ -7,11 +7,6 @@ class Favorites extends React.Component{
         return(
             <div className="faves">
                 <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-
             </div>
         )
     }
