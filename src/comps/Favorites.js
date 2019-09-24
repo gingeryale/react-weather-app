@@ -2,12 +2,19 @@ import React, {Component} from 'react';
 import '../App.css';
 import Card from './Card';
 
-let ls_Faves = localStorage.getItem('Favorites').split(',');
+let lsFaves = localStorage.getItem('Favorites').split(',');
+var lsReducer = lsFaves.reduce(function (accumulator, currentValue) {
+    if (accumulator.indexOf(currentValue) === -1) {
+      accumulator.push(currentValue);
+    }
+    return accumulator;
+  }, []);
+  console.log(lsReducer);
 
 class Favorites extends Component{
     
     state={
-        getFavorites: ls_Faves
+        getFavorites: lsReducer
     }
 
     componentDidMount(){

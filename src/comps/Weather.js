@@ -6,7 +6,7 @@ class Weather extends Component {
 
     state = {
         weather:[],
-        city:'tel aviv',
+        city:'new york',
         forecast:[],
         setFavorites:[]
     }
@@ -27,7 +27,7 @@ class Weather extends Component {
                         onChange={this.handleChange.bind(this) }
                         className="form-control form-control-lg"
                         type="text"
-                        placeholder="Tel Aviv"/>
+                        placeholder={this.state.city}/>
                     <button onClick={this.loadWeather.bind(this)}
                         className="btn btn-primary mb-2">Search</button>
                 </div>
@@ -93,20 +93,20 @@ async loadWeather(city) {
     let _APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
     let APIkey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
     try {
-        var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
+        var res = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
       } catch(err) {
         alert("Couldn't find that location, please make sure you spelled it correctly");
       }
-        var jsonDATA = await r.json();
+        var jsonDATA = await res.json();
+        debugger;
         try {
         var cityKey = jsonDATA[0].Key;
-        var res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
-        var jsonCityData = await res2.json();
-        this.setState({ weather : jsonCityData });
         }catch(err){
             alert("Couldn't find that location, please make sure you spelled it correctly");
         }
-
+        var res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
+        var jsonCityData = await res2.json();
+        this.setState({ weather : jsonCityData });
         try{
             var res3 = await fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
             var jsonForecastData = await res3.json();

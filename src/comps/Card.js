@@ -11,7 +11,7 @@ class Card extends React.Component {
      return(
 <div className="card weather">
   <div className="card-body">
-    <h5>{header}</h5>
+    {header}
     <p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
   </div>
 </div>
