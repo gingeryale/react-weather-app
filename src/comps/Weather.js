@@ -111,11 +111,11 @@ async loadWeather(city) {
     city = this.state.city;
 
     let EXPOSEDAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let GONEAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    let APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
 
     let GOODAPIkey = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
     let ALSOGOODAPIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
-    let APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
+    let GOOODAPIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
     try {
         var res = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
       } catch(err) {
