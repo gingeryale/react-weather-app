@@ -2,8 +2,12 @@ import React, {Component} from 'react';
 import '../App.css';
 import Card from './Card';
 
-var lsFaves=[];
-localStorage.setItem("faves", JSON.stringify(lsFaves));    
+if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
+    var lsFaves = JSON.parse(localStorage.getItem('faves'));
+} else {
+    var lsFaves=[""];
+    localStorage.setItem("faves", JSON.stringify(lsFaves));
+}
 
 class Weather extends Component {
 
