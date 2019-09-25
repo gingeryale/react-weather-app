@@ -9,13 +9,16 @@ class Card extends React.Component {
       header = (<h5>{moment.unix(date).format('ddd')}</h5>) : 
       header = (<h5>{this.props.city}</h5>);
     let condition;
-    this.props.condition ? condition = null : condition = (<h2>{this.props.condition}</h2>)
+    this.props.condition ?  condition = (<h5>{this.props.condition}</h5>) : condition = (null);
+    let remove;
+    this.props.condition ?  remove = (<div><button className="btn-sm btn btn-outline-danger">x</button></div>) : condition = (null);
      return(
 <div className="card weather">
   <div className="card-body">
-    {condition}
     {header}
     <p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
+    {condition}
+    {remove}
   </div>
 </div>
     );

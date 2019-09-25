@@ -4,14 +4,14 @@ import Card from './Card';
 
 if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
     var lsFaves = JSON.parse(localStorage.getItem('faves'));
-    var stateFaves = [...new Set(lsFaves.map(el => el.city))];
+    // var stateFaves = [...new Set(lsFaves.map(el => el.city))];
 } else {
     localStorage.setItem('faves', []);
     var lsFaves=[];
 }
 
-console.log("stateFaves");
-console.log(stateFaves, lsFaves);
+
+
 
 function reduceArray(arr, comp) {
     const singleVal = arr.map(e => e[comp])
@@ -21,6 +21,7 @@ function reduceArray(arr, comp) {
   }
   
   var finalArray = reduceArray(lsFaves,'city');
+  console.log("fave final array");
   console.log(finalArray);
 
 
@@ -53,6 +54,9 @@ class Favorites extends Component{
                 <Card 
                     key={i} 
                     city={f.city} 
+                    unit={f.unit}
+                    condition={f.cityText}
+                    temp={f.temp}
                      />
                 )}
             </div>
@@ -70,12 +74,10 @@ class Favorites extends Component{
 
     // fetch data
 async loadWeather(city) {
-    city = this.state.city;
-    let cityKey = 'WWW';
-    // let EXPOWWWAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    // let EXPAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-    // let EXAPIkey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
-    let APIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+    city = '';
+    let cityKey = '';
+   
+    let APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
     // try {
     //     var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
     //   } catch(err) {
