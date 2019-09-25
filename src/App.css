@@ -140,7 +140,11 @@ h2.forecast{
 
 .extForecast, .faves{
   display: flex;
-  justify-content: space-evenly;
+    width: 100%;
+    max-width: 80vw;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 auto;
 }
 
 .btn-primary{

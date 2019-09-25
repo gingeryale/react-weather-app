@@ -6,8 +6,8 @@ if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== 
     var lsFaves = JSON.parse(localStorage.getItem('faves'));
     // var stateFaves = [...new Set(lsFaves.map(el => el.city))];
 } else {
-    localStorage.setItem('faves', []);
-    var lsFaves=[];
+    var lsFaves=[""];
+    localStorage.setItem("faves", JSON.stringify(lsFaves));
 }
 
 
@@ -74,7 +74,8 @@ async loadWeather(city) {
     city = '';
     let cityKey = '';
    
-    let APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
+    let GOODAPIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
+    let APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
     // try {
     //     var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
     //   } catch(err) {
