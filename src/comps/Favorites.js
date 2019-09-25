@@ -36,7 +36,8 @@ class Favorites extends Component{
 
     componentDidMount(){
         //this.loadWeather();
-        console.log(this.state.getFavorites)
+        console.log("from state", this.state.getFavorites);
+        JSON.parse(localStorage.getItem('faves'))
     }
 
     render(){
