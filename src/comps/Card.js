@@ -11,9 +11,9 @@ class Card extends React.Component {
     let condition;
     this.props.condition ?  condition = (<h5>{this.props.condition}</h5>) : condition = (null);
     let remove;
-    this.props.condition ?  remove = (<div><button className="btn-sm btn btn-outline-danger">x</button></div>) : condition = (null);
+    this.props.condition ?  remove = (<div><button className={this.props.city} onClick={this.removeMe.bind(this)} className="btn-sm btn btn-outline-danger">x</button></div>) : condition = (null);
      return(
-<div className="card weather">
+<div className="card weather" data={this.props.city}>
   <div className="card-body">
     {header}
     <p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
@@ -26,7 +26,27 @@ class Card extends React.Component {
     
   }
 
-   
+  removeMe(e){
+    console.log(e);
+    
+    var ccity = this.props.city;
+   debugger;
+    var farray = JSON.parse(localStorage.getItem("faves"));
+    console.log("aa", farray);
+    for (var i =0; i< farray.length; i++) {
+    var elm = farray[i];
+      if (elm.city === ccity) {
+      farray.splice(elm[i], 1);
+      } else {
+        console.log(farray);
+      }
+}
+let strinArra = JSON.stringify(farray);
+localStorage.setItem("faves", strinArra);
+
+
+
+  }
 }
     
 
