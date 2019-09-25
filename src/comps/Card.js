@@ -7,7 +7,7 @@ class Card extends React.Component {
     let header;
     this.props.day ? 
       header = (<h5>{moment.unix(date).format('ddd')}</h5>) : 
-      header = (<h5>{this.props.city}</h5>);
+      header = (<h4>{this.props.city}</h4>);
     let condition;
     this.props.condition ?  condition = (<h5>{this.props.condition}</h5>) : condition = (null);
     let removeBTN;

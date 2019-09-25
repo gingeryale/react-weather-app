@@ -48,7 +48,7 @@ class Weather extends Component {
                     <div className="divy2">
                         <div className="card fifty1">
                             <div className="card-body">
-                            <img src={`https://developer.accuweather.com/sites/default/files/${fn}-s.png`} height="45px" alt="img"/>
+                            <img src={`https://developer.accuweather.com/sites/default/files/${fn}-s.png`} width="75px" height="45px" alt="img"/>
                                 <div>
                                     <h5 className="card-title">
                                         {this.state.searchVal} </h5>
@@ -114,13 +114,13 @@ addFave(city, key, temp, unit, cityText){
 async loadWeather(city) {
     city = this.state.city;
 
-    let EXPOSEDAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
     let GOODAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
 
     let GOODAPIkey2 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
     let ALSOGOODAPIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
     let GOOODAPIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
-    let APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
+    let GOODYAPIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
 
     try {
         var res = await fetch("https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);

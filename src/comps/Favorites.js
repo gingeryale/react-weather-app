@@ -40,8 +40,8 @@ class Favorites extends Component{
 
         let message;
         this.state.getFavorites.length !== 0 ? 
-        message = (<h5>Your list of favorites</h5>) : 
-        message = (<h5>You have zero favorites, start adding some!</h5>);
+        message = (<h5 className="display-4 text-center">Your list of favorites</h5>) : 
+        message = (<h5 className="display-4 text-center">You have zero favorites, start adding some!</h5>);
 
         return(
             <div>
