@@ -11,8 +11,6 @@ if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== 
 }
 
 
-
-
 function reduceArray(arr, comp) {
     const singleVal = arr.map(e => e[comp])
       .map((e, i, final) => final.indexOf(e) === i && i)
@@ -21,23 +19,21 @@ function reduceArray(arr, comp) {
   }
   
   var finalArray = reduceArray(lsFaves,'city');
-  console.log("fave final array");
-  console.log(finalArray);
+
 
 
 
 class Favorites extends Component{
 
     state={
-        getFavorites: finalArray,
-        getCurrWeather:[{}]
+        getFavorites: finalArray
         
     }
 
     componentDidMount(){
         //this.loadWeather();
-        console.log("from state", this.state.getFavorites);
-        JSON.parse(localStorage.getItem('faves'))
+        const getFavorites = JSON.parse( localStorage.getItem( "faves" ) );
+        this.setState( { getFavorites } );
     }
 
     render(){
