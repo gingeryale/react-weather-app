@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../App.css';
 import Card from './Card';
 
-if((localStorage.getItem('faves') !== "") || (localStorage.getItem('faves') !== null)){
+if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
     var lsFaves = JSON.parse(localStorage.getItem('faves'));
     var stateFaves = [...new Set(lsFaves.map(el => el.city))];
 } else {
