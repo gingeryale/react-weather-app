@@ -5,12 +5,15 @@ class Card extends React.Component {
   render(){
     let date = this.props.day;
     let header;
-    this.props.day ? header = (
-      <h5>{moment.unix(date).format('ddd')}</h5>
-    ) : header = (<h5>{this.props.city}</h5>);
+    this.props.day ? 
+      header = (<h5>{moment.unix(date).format('ddd')}</h5>) : 
+      header = (<h5>{this.props.city}</h5>);
+    let condition;
+    this.props.condition ? condition = null : condition = (<h2>{this.props.condition}</h2>)
      return(
 <div className="card weather">
   <div className="card-body">
+    {condition}
     {header}
     <p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
   </div>

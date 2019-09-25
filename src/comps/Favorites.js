@@ -2,35 +2,60 @@ import React, {Component} from 'react';
 import '../App.css';
 import Card from './Card';
 
-if(localStorage.getItem('faves') !== null){
+if((localStorage.getItem('faves') !== "") || (localStorage.getItem('faves') !== null)){
     var lsFaves = JSON.parse(localStorage.getItem('faves'));
+    var stateFaves = [...new Set(lsFaves.map(el => el.city))];
 } else {
     localStorage.setItem('faves', []);
+    var lsFaves=[];
 }
 
-let stateFaves = [...new Set(lsFaves.map(el => el.city))]
+console.log("stateFaves");
+console.log(stateFaves, lsFaves);
+
+function reduceArray(arr, comp) {
+    const singleVal = arr.map(e => e[comp])
+      .map((e, i, final) => final.indexOf(e) === i && i)
+        .filter(e => arr[e]).map(e => arr[e]);
+     return singleVal;
+  }
+  
+  var finalArray = reduceArray(lsFaves,'city');
+  console.log(finalArray);
 
 
-console.log(stateFaves);
 
 class Favorites extends Component{
-    
+
     state={
-        getFavorites: stateFaves
+        getFavorites: finalArray,
+        getCurrWeather:[{}]
         
     }
 
     componentDidMount(){
         //this.loadWeather();
-        this.localStorageHandle();
+        console.log(this.state.getFavorites)
     }
 
     render(){
+
+        let message;
+        this.state.getFavorites.length !== 0 ? 
+        message = (<h5>Your list of favorites</h5>) : 
+        message = (<h5>You have zero favorites, start adding some!</h5>);
+
         return(
-            <div className="faves">
-                 {this.state.getFavorites.map((f, i) => 
-            <Card  key={i} city={f}/>
-            )}
+            <div>
+                <div>{message}</div>
+                <div className="faves">
+               {this.state.getFavorites.map((f, i) => 
+                <Card 
+                    key={i} 
+                    city={f.city} 
+                     />
+                )}
+            </div>
             </div>
         )
     }
@@ -46,17 +71,19 @@ class Favorites extends Component{
     // fetch data
 async loadWeather(city) {
     city = this.state.city;
-    let _WWWAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let _APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-    let APIkey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
-    try {
-        var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
-      } catch(err) {
-        alert("Couldn't find that location, please make sure you spelled it correctly");
-      }
-        var jsonDATA = await r.json();
+    let cityKey = 'WWW';
+    // let EXPOWWWAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    // let EXPAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    // let EXAPIkey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
+    let APIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+    // try {
+    //     var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
+    //   } catch(err) {
+    //     alert("Couldn't find that location, please make sure you spelled it correctly");
+    //   }
+        // var jsonDATA = await r.json();
         try {
-        var cityKey = jsonDATA[0].Key;
+        // var cityKey = jsonDATA[0].Key;
         var res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
         var jsonCityData = await res2.json();
         this.setState({ weather : jsonCityData });

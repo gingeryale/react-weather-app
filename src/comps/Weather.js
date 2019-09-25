@@ -8,6 +8,9 @@ class Weather extends Component {
         weather:[],
         searchVal:'tel aviv',
         cityKey:'215854',
+        unit:'',
+        cityText:'',
+        cityTemp:'215854',
         city:'tel aviv',
         forecast:[],
         setFavorites:"",
@@ -83,11 +86,14 @@ class Weather extends Component {
     }
 
     
-addFave(city, key){
+addFave(city, key, temp, unit, cityText){
     city = this.state.searchVal;
     key = this.state.cityKey;
+    temp = this.state.cityTemp;
+    unit = this.state.unit;
+    cityText = this.state.cityText;
     var prevFaveArray = [...this.state.setFavorites];
-    prevFaveArray.push({"city":city, "key":key});
+    prevFaveArray.push({"city":city, "key":key, "temp": temp, "unit": unit, "cityText":cityText});
     this.setState({ setFavorites: prevFaveArray });
     localStorage.setItem('faves', JSON.stringify(prevFaveArray));
 }
@@ -121,10 +127,13 @@ async loadWeather(city) {
         var res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
         var jsonCityData = await res2.json();
         this.setState({ weather : jsonCityData });
+        this.setState({unit: jsonCityData.Temperature.Metric.Unit}); 
+        this.setState({cityTemp: jsonCityData.Temperature.Metric.Value});
+        this.setState({cityText:jsonCityData.WeatherText}); 
         try{
             var res3 = await fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
             var jsonForecastData = await res3.json();
-            this.setState({ forecast : jsonForecastData.DailyForecasts });   
+            this.setState({ forecast : jsonForecastData.DailyForecasts });  
         }catch(err){
             alert("An Error occurred, try again");
             return;
