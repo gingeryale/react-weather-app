@@ -6,13 +6,19 @@ class Weather extends Component {
 
     state = {
         weather:[],
-        city:'new york',
+        searchVal:'tel aviv',
+        cityKey:'215854',
+        city:'tel aviv',
         forecast:[],
-        setFavorites:[]
+        setFavorites:"",
+
+        cityKeySearch:[{"Version":1,"Key":"349727","Type":"City","Rank":15,"LocalizedName":"New York","EnglishName":"New York","PrimaryPostalCode":"10007","Region":{"ID":"NAM","LocalizedName":"North America","EnglishName":"North America"},"Country":{"ID":"US","LocalizedName":"United States","EnglishName":"United States"},"AdministrativeArea":{"ID":"NY","LocalizedName":"New York","EnglishName":"New York","Level":1,"LocalizedType":"State","EnglishType":"State","CountryID":"US"},"TimeZone":{"Code":"EDT","Name":"America/New_York","GmtOffset":-4.0,"IsDaylightSaving":true,"NextOffsetChange":"2019-11-03T06:00:00Z"},"GeoPosition":{"Latitude":40.779,"Longitude":-73.969,"Elevation":{"Metric":{"Value":8.0,"Unit":"m","UnitType":5},"Imperial":{"Value":26.0,"Unit":"ft","UnitType":0}}},"IsAlias":false,"SupplementalAdminAreas":[{"Level":2,"LocalizedName":"New York","EnglishName":"New York"}],"DataSets":["Alerts","DailyAirQualityForecast","DailyPollenForecast","ForecastConfidence","MinuteCast","Radar"]}],
+        forecastWWWW:[{"Date":"2019-09-24T07:00:00-04:00","EpochDate":1569322800,"Temperature":{"Minimum":{"Value":15.0,"Unit":"C","UnitType":17},"Maximum":{"Value":24.4,"Unit":"C","UnitType":17}},"Day":{"Icon":4,"IconPhrase":"Intermittent clouds","HasPrecipitation":false},"Night":{"Icon":33,"IconPhrase":"Clear","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?unit=c&lang=en-us","Link":"http://www.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?unit=c&lang=en-us"},{"Date":"2019-09-25T07:00:00-04:00","EpochDate":1569409200,"Temperature":{"Minimum":{"Value":17.4,"Unit":"C","UnitType":17},"Maximum":{"Value":25.4,"Unit":"C","UnitType":17}},"Day":{"Icon":1,"IconPhrase":"Sunny","HasPrecipitation":false},"Night":{"Icon":34,"IconPhrase":"Mostly clear","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=1&unit=c&lang=en-us","Link":"http://www.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=1&unit=c&lang=en-us"},{"Date":"2019-09-26T07:00:00-04:00","EpochDate":1569495600,"Temperature":{"Minimum":{"Value":16.7,"Unit":"C","UnitType":17},"Maximum":{"Value":27.8,"Unit":"C","UnitType":17}},"Day":{"Icon":2,"IconPhrase":"Mostly sunny","HasPrecipitation":false},"Night":{"Icon":34,"IconPhrase":"Mostly clear","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=2&unit=c&lang=en-us","Link":"http://www.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=2&unit=c&lang=en-us"},{"Date":"2019-09-27T07:00:00-04:00","EpochDate":1569582000,"Temperature":{"Minimum":{"Value":17.2,"Unit":"C","UnitType":17},"Maximum":{"Value":24.5,"Unit":"C","UnitType":17}},"Day":{"Icon":2,"IconPhrase":"Mostly sunny","HasPrecipitation":false},"Night":{"Icon":33,"IconPhrase":"Clear","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=3&unit=c&lang=en-us","Link":"http://www.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=3&unit=c&lang=en-us"},{"Date":"2019-09-28T07:00:00-04:00","EpochDate":1569668400,"Temperature":{"Minimum":{"Value":19.4,"Unit":"C","UnitType":17},"Maximum":{"Value":27.8,"Unit":"C","UnitType":17}},"Day":{"Icon":2,"IconPhrase":"Mostly sunny","HasPrecipitation":false},"Night":{"Icon":35,"IconPhrase":"Partly cloudy","HasPrecipitation":false},"Sources":["AccuWeather"],"MobileLink":"http://m.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=4&unit=c&lang=en-us","Link":"http://www.accuweather.com/en/us/new-york-ny/10007/daily-weather-forecast/349727?day=4&unit=c&lang=en-us"}],
+        weatherWWWW:[{"LocalObservationDateTime":"2019-09-25T00:27:00-04:00","EpochTime":1569385620,"WeatherText":"Clear","WeatherIcon":33,"HasPrecipitation":false,"PrecipitationType":null,"IsDayTime":false,"Temperature":{"Metric":{"Value":18.3,"Unit":"C","UnitType":17},"Imperial":{"Value":65.0,"Unit":"F","UnitType":18}},"MobileLink":"http://m.accuweather.com/en/us/new-york-ny/10007/current-weather/349727?lang=en-us","Link":"http://www.accuweather.com/en/us/new-york-ny/10007/current-weather/349727?lang=en-us"}]
     }
 
     componentDidMount() {
-        this.loadWeather();
+        //this.loadWeather();
     }
 
     render() {
@@ -39,7 +45,7 @@ class Weather extends Component {
                             <img src={`https://developer.accuweather.com/sites/default/files/${fn}-s.png`} height="45px" alt="img"/>
                                 <div>
                                     <h5 className="card-title">
-                                        {this.state.city} </h5>
+                                        {this.state.searchVal} </h5>
                                     <p className="card-text">
                                         {CW.Temperature.Metric.Value}&deg; {CW.Temperature.Metric.Unit}</p>
                                 </div>
@@ -76,33 +82,41 @@ class Weather extends Component {
         this.setState({[e.target.name]: e.target.value.toLowerCase().trim()});
     }
 
-
-    addFave(e, city){
-        city = this.state.city;
-        var prevFaveArray = [...this.state.setFavorites];
-        prevFaveArray.push(city);
-        this.setState({ setFavorites: prevFaveArray });
-        localStorage.setItem('Favorites', prevFaveArray);
-    }
+    
+addFave(city, key){
+    city = this.state.searchVal;
+    key = this.state.cityKey;
+    var prevFaveArray = [...this.state.setFavorites];
+    prevFaveArray.push({"city":city, "key":key});
+    this.setState({ setFavorites: prevFaveArray });
+    localStorage.setItem('faves', JSON.stringify(prevFaveArray));
+}
 
 
 // fetch data
 async loadWeather(city) {
     city = this.state.city;
-    let _WWWAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let _APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-    let APIkey = `FziO8d54IiCnnCTSk4IWhKvfvRe6fnMa`;
+
+    let EXPOSEDAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let GONEAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+
+    let GOODAPIkey = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
+    let APIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
     try {
         var res = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
       } catch(err) {
         alert("Couldn't find that location, please make sure you spelled it correctly");
+        return
       }
+       
         var jsonDATA = await res.json();
-        debugger;
         try {
         var cityKey = jsonDATA[0].Key;
+        this.setState({searchVal: city});
+        this.setState({cityKey: cityKey});
         }catch(err){
-            alert("Couldn't find that location, please make sure you spelled it correctly");
+            alert("An Error occurred, try again, or check your spelling");
+            return;
         }
         var res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
         var jsonCityData = await res2.json();
@@ -112,12 +126,12 @@ async loadWeather(city) {
             var jsonForecastData = await res3.json();
             this.setState({ forecast : jsonForecastData.DailyForecasts });   
         }catch(err){
-            console.log(err);
-            window.location.reload();
+            alert("An Error occurred, try again");
+            return;
         }
     }
+
+
 }
-
-
 
 export default Weather;

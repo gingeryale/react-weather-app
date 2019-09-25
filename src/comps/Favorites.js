@@ -2,23 +2,27 @@ import React, {Component} from 'react';
 import '../App.css';
 import Card from './Card';
 
-let lsFaves = localStorage.getItem('Favorites').split(',');
-var lsReducer = lsFaves.reduce(function (accumulator, currentValue) {
-    if (accumulator.indexOf(currentValue) === -1) {
-      accumulator.push(currentValue);
-    }
-    return accumulator;
-  }, []);
-  console.log(lsReducer);
+if(localStorage.getItem('faves') !== null){
+    var lsFaves = JSON.parse(localStorage.getItem('faves'));
+} else {
+    localStorage.setItem('faves', []);
+}
+
+let stateFaves = [...new Set(lsFaves.map(el => el.city))]
+
+
+console.log(stateFaves);
 
 class Favorites extends Component{
     
     state={
-        getFavorites: lsReducer
+        getFavorites: stateFaves
+        
     }
 
     componentDidMount(){
         //this.loadWeather();
+        this.localStorageHandle();
     }
 
     render(){
@@ -31,7 +35,13 @@ class Favorites extends Component{
         )
     }
 
-
+    localStorageHandle(){
+        let store = localStorage.getItem('city');
+        if(store == null){
+            localStorage.setItem('Favorites', []);
+            
+            }
+    }
 
     // fetch data
 async loadWeather(city) {
@@ -52,15 +62,6 @@ async loadWeather(city) {
         this.setState({ weather : jsonCityData });
         }catch(err){
             alert("Couldn't find that location, please make sure you spelled it correctly");
-        }
-
-        try{
-            var res3 = await fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
-            var jsonForecastData = await res3.json();
-            this.setState({ forecast : jsonForecastData.DailyForecasts });   
-        }catch(err){
-            console.log(err);
-            window.location.reload();
         }
     }
 
