@@ -150,16 +150,6 @@ handleUnFave(ccity){
 // fetch data
 async loadWeather(city) {
     city = this.state.city;
-
-    let __APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let ____APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-
-    let APIkey999 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
-    let _APIkey = `999`
-    let APIkey0000 = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
-    let ___b_APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
-    let ___APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
-
     let APIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
 
     try {
