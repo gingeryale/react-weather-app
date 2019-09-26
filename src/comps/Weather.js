@@ -134,7 +134,6 @@ handleFave(city, key, temp, unit, cityText){
     }
 }
 handleUnFave(ccity){
-    debugger;
     console.log('unfave');
     var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
     for(let i =0; i < lsFaveArr.length; i++){
@@ -143,6 +142,7 @@ handleUnFave(ccity){
         }
     }
     localStorage.setItem('faves', JSON.stringify(lsFaveArr));
+    this.setState({isFavorite:false});
 }
 
 // fetch data

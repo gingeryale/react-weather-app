@@ -4,7 +4,6 @@ import Card from './Card';
 
 if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
     var lsFaves = JSON.parse(localStorage.getItem('faves'));
-    // var stateFaves = [...new Set(lsFaves.map(el => el.city))];
 } else {
     var lsFaves=[""];
     localStorage.setItem("faves", JSON.stringify(lsFaves));
@@ -30,7 +29,6 @@ class Favorites extends Component{
     }
 
     componentDidMount(){
-        //this.loadWeather();
         const getFavorites = JSON.parse( localStorage.getItem( "faves" ) );
         this.setState( { getFavorites } );
         this.updateData();
