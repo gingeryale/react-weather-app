@@ -2,12 +2,6 @@ import React, {Component} from 'react';
 import '../App.css';
 import Card from './Card';
 
-if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
-    var lsFaves = JSON.parse(localStorage.getItem('faves'));
-} else {
-    var lsFaves=[""];
-    localStorage.setItem("faves", JSON.stringify(lsFaves));
-}
 
 class Weather extends Component {
 
@@ -106,12 +100,20 @@ class Weather extends Component {
 
 isFaved(ccity){
     ccity = this.state.searchVal;
-    var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
+
+    if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
+        var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
     if (lsFaveArr.filter(el => el.city === ccity).length > 0) {
         this.setState({isFavorite:true})
       }else{
         this.setState({isFavorite:false})
       }
+    } else {
+        var lsFaves=[];
+        localStorage.setItem("faves", JSON.stringify(lsFaves));
+    }
+
+    
 }  
 
 handleFave(city, key, temp, unit, cityText){
@@ -154,9 +156,11 @@ async loadWeather(city) {
 
     let APIkey999 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
     let _APIkey = `999`
-    let APIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+    let APIkey0000 = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
     let ___b_APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
     let ___APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
+
+    let APIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
 
     try {
         var res = await fetch("https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);

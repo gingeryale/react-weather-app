@@ -4,8 +4,9 @@ import Card from './Card';
 
 if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
     var lsFaves = JSON.parse(localStorage.getItem('faves'));
+    // var stateFaves = [...new Set(lsFaves.map(el => el.city))];
 } else {
-    var lsFaves=[""];
+    var lsFaves=[];
     localStorage.setItem("faves", JSON.stringify(lsFaves));
 }
 
@@ -68,10 +69,10 @@ class Favorites extends Component{
 
 
     async updateData() { 
-    let APIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+    let APIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
     let thisState = this;
-    /////////////////////// changed from localStore to finalArray
-    let keyarr = finalArray;
+    let keyarr = JSON.parse(localStorage.getItem('faves'));
+    keyarr ?  keyarr = JSON.parse(localStorage.getItem('faves')) : keyarr = 215854;
     for(let i=0;i<keyarr.length; i++) {
         await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + APIkey)
         .then(res => {
