@@ -26,15 +26,14 @@ function reduceArray(arr, comp) {
 class Favorites extends Component{
 
     state={
-        getFavorites: finalArray,
-        WeatherUpdate:[]
-        
+        getFavorites: finalArray  
     }
 
     componentDidMount(){
         //this.loadWeather();
         const getFavorites = JSON.parse( localStorage.getItem( "faves" ) );
         this.setState( { getFavorites } );
+        //this.updateData();
     }
 
     render(){
@@ -70,46 +69,28 @@ class Favorites extends Component{
             }
     }
 
-    // fetch data
-updater(arrayOfKeys){
-    let APIkey = `123`;
-    arrayOfKeys=[1,2];
-    for(let i=0;i<arrayOfKeys.length; i++) {
-        fetch('https://wind-bow.glitch.me/twitch-api/users/' + arrayOfKeys[i] + APIkey)
+
+    async updateData() { 
+    let APIkey = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
+    //let keyarr = this.state.getFavorites;
+    let thisState = this;
+    let keyarr = JSON.parse( localStorage.getItem( "faves" ) );
+    for(let i=0;i<keyarr.length; i++) {
+        await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + APIkey)
         .then(res => {
         if(res.ok) return res.json();
         throw new Error(res.statusText);
         })
         .then(function handleData(data) {
-        this.setState({WeatherUpdate: data})
+          keyarr[i].cityText = data[0].WeatherText
+          keyarr[i].temp = data[0].Temperature.Metric.Value;
         })
         .catch(function handleError(error) {
         alert(error);
         });
     }
+    thisState.setState({getFavorites: keyarr})
 }
-async loadWeather(city) {
-    city = '';
-    let cityKey = '';
-   
-    let GOODAPIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
-    let APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
-    // try {
-    //     var r = await fetch("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
-    //   } catch(err) {
-    //     alert("Couldn't find that location, please make sure you spelled it correctly");
-    //   }
-        // var jsonDATA = await r.json();
-        try {
-        // var cityKey = jsonDATA[0].Key;
-        var res2 = await fetch("http://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
-        var jsonCityData = await res2.json();
-        this.setState({ weather : jsonCityData });
-        }catch(err){
-            alert("Couldn't find that location, please make sure you spelled it correctly");
-        }
-    }
-
 
 }
 
