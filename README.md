@@ -1,6 +1,6 @@
-App created as part of an entrance exam for a FED position.
+# App created as part of an entrance exam for a FED position.
 
-# This weather utilises:#
+## This weather app utilises:#
 ### AccuWeather API
 ### localStorage add/delete
 
