@@ -68,6 +68,9 @@ justify-content: start;
 
 .card{
   max-width:22%;
+  width: 100%;
+  max-width: 10rem;
+  margin: 1rem;
 }
 
 .card .weather{

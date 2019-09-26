@@ -72,9 +72,9 @@ class Favorites extends Component{
 
     async updateData() { 
     let APIkey = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
-    //let keyarr = this.state.getFavorites;
     let thisState = this;
-    let keyarr = JSON.parse( localStorage.getItem( "faves" ) );
+    /////////////////////// changed from localStore to finalArray
+    let keyarr = finalArray;
     for(let i=0;i<keyarr.length; i++) {
         await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + APIkey)
         .then(res => {

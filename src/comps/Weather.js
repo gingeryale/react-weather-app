@@ -12,6 +12,20 @@ if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== 
 class Weather extends Component {
 
     state = {
+        // weather:[
+        //     {"LocalObservationDateTime":"2019-09-25T00:27:00-04:00",
+        //     "EpochTime":1569385620,
+        //     "WeatherText":"Clear",
+        //     "WeatherIcon":33,
+        //     "HasPrecipitation":false,
+        //     "PrecipitationType":null,
+        //     "IsDayTime":false,
+        //     "Temperature":
+        //         {"Metric":
+        //             {"Value":18.3,"Unit":"C","UnitType":17},
+        //             "Imperial":{"Value":65.0,"Unit":"F","UnitType":18}
+        //         },
+        //             }],
         weather:[],
         searchVal:'',
         cityKey:'215854',
@@ -21,6 +35,7 @@ class Weather extends Component {
         city:'tel aviv',
         forecast:[],
         setFavorites:"",
+        isFavorite: false
     }
 
     componentDidMount() {
@@ -30,7 +45,8 @@ class Weather extends Component {
     render() {
         var fn = this.state.weather.map(val =>
             val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
-            
+        var faveSate = this.state.isFavorite;
+        faveSate ? faveSate=(<div onClick={this.handleUnFave.bind(this, this.state.city)}>REMOVE FAVE</div>) : faveSate=(<div onClick={this.handleFave.bind(this, this.state.city)}>ADD FAVE</div>);
         return (
         <div>
             <div className="form">
@@ -47,7 +63,8 @@ class Weather extends Component {
                 <div className="divy2">
                     <div className="card fifty1">
                         <div className="card-body">
-                        <img src={`https://developer.accuweather.com/sites/default/files/${fn}-s.png`} width="75px" height="45px" alt="img"/>
+                        <img src={`https://developer.accuweather.com/sites/default/files/${fn}-s.png`} 
+                        width="75px" height="45px" alt="img"/>
                             <div>
                                 <h5 className="card-title">
                                     {this.state.searchVal} </h5>
@@ -59,7 +76,7 @@ class Weather extends Component {
                     <div className="fifty2">
                         <p className="faveHeart">
                             <span>&hearts;</span>
-                            <button onClick={this.addFave.bind(this, this.state.city)} className="boxy btn btn-outline-danger">Add To Favorites</button>
+                            <button className="boxy btn btn-outline-danger">{faveSate}</button>
                         </p>
                     </div>
             </div>
@@ -86,8 +103,18 @@ class Weather extends Component {
         this.setState({[e.target.name]: e.target.value.toLowerCase().trim()});
     }
 
-    
-addFave(city, key, temp, unit, cityText){
+isFaved(ccity){
+    debugger;
+    ccity = this.state.searchVal;
+    var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
+    if (lsFaveArr.filter(el => el.city === ccity).length > 0) {
+        this.setState({isFavorite:true})
+      }else{
+        this.setState({isFavorite:false})
+      }
+}  
+
+handleFave(city, key, temp, unit, cityText){
     city = this.state.searchVal;
     key = this.state.cityKey;
     temp = this.state.cityTemp;
@@ -98,27 +125,30 @@ addFave(city, key, temp, unit, cityText){
     this.setState({ setFavorites: prevFaveArray });
     if((localStorage.getItem('faves') == "") || (localStorage.getItem('faves') == null)){
         localStorage.setItem('faves', JSON.stringify(prevFaveArray));
-        alert(`Added ${this.state.city} to your Faves!`)
+        this.setState({isFavorite:true});
     }else{
         var existingStore = JSON.parse(localStorage.getItem("faves"));
         existingStore.push({"city":city, "key":key, "temp": temp, "unit": unit, "cityText":cityText});
         localStorage.setItem("faves", JSON.stringify(existingStore));
-        alert(`Added ${this.state.city} to your Faves!`)
+        this.setState({isFavorite:true});
     }
 }
-
+handleUnFave(){
+    console.log('unfave');
+}
 
 // fetch data
 async loadWeather(city) {
     city = this.state.city;
 
-    let EXPOSEAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let GOODAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    let __APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let ____APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
 
-    let APIkey = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
-    let ALSOGOODAPIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
-    let GOOODAPIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
-    let GOODYAPIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
+    let APIkey999 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
+    let _APIkey = `999`
+    let APIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+    let ___b_APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
+    let ___APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
 
     try {
         var res = await fetch("https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
@@ -150,8 +180,8 @@ async loadWeather(city) {
             alert("An Error occurred, try again");
             return;
         }
+        this.isFaved();
     }
-
 
 }
 
