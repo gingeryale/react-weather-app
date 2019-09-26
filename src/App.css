@@ -1,5 +1,6 @@
 body{
   font-size:10px;
+  box-sizing: border-box;
 }
 * div{
   font-size:1rem;
@@ -10,10 +11,10 @@ body{
   margin-bottom: 3rem;
 }
 .bar > ul{
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-right:1.5rem;
   display: flex;
   justify-content: flex-end;
-  width: 81vw;
 }
 .bar ul > li{
   margin-left:1rem;
@@ -24,6 +25,7 @@ span.brand {
   display: flex;
   justify-content: flex-start;
   align-self: center;
+  width:100%;
 }
 .App {
   text-align: left;
@@ -88,7 +90,7 @@ main.weatherForm .form{
 }
 
 .weatherForm{
-  max-width: 50vw;
+  max-width: 60vw;
     margin: 1rem auto;
 }
 
@@ -98,7 +100,8 @@ main.weatherForm .form{
   position: fixed;
   width: 100%;
   bottom: 0;
-  background-color: rgba(255,255,255,.8);
+  background-color: rgba(255,255,255,.9);
+  padding:1rem;
   left: 0;
   border-top:1px solid #efefef;
 }
@@ -164,9 +167,6 @@ h2.forecast{
   html, body{
     font-size:13px;
   }
-  .bar > ul {
-    width: 66vw;
-  }
   .weatherForm input {
     width: 60vw;
   }
@@ -191,11 +191,5 @@ h2.forecast{
     flex-direction: column;
     align-items: center;
     align-content: space-evenly;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .bar > ul {
-    width: 60vw;
   }
 }

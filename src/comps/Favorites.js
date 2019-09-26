@@ -26,7 +26,8 @@ function reduceArray(arr, comp) {
 class Favorites extends Component{
 
     state={
-        getFavorites: finalArray
+        getFavorites: finalArray,
+        WeatherUpdate:[]
         
     }
 
@@ -70,6 +71,23 @@ class Favorites extends Component{
     }
 
     // fetch data
+updater(arrayOfKeys){
+    let APIkey = `123`;
+    arrayOfKeys=[1,2];
+    for(let i=0;i<arrayOfKeys.length; i++) {
+        fetch('https://wind-bow.glitch.me/twitch-api/users/' + arrayOfKeys[i] + APIkey)
+        .then(res => {
+        if(res.ok) return res.json();
+        throw new Error(res.statusText);
+        })
+        .then(function handleData(data) {
+        this.setState({WeatherUpdate: data})
+        })
+        .catch(function handleError(error) {
+        alert(error);
+        });
+    }
+}
 async loadWeather(city) {
     city = '';
     let cityKey = '';

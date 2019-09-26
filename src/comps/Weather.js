@@ -33,43 +33,41 @@ class Weather extends Component {
             
         return (
         <div>
-            <div className="cityWeather">
-                <div className="form">
-                    <input name="city"
-                        onChange={this.handleChange.bind(this) }
-                        className="form-control form-control-lg"
-                        type="text"
-                        placeholder={this.state.city}/>
-                    <button onClick={this.loadWeather.bind(this)}
-                        className="btn btn-primary mb-2">Search</button>
-                </div>
-                {this.state.weather.map((CW, i) =>
-                <div key={i}> 
-                    <div className="divy2">
-                        <div className="card fifty1">
-                            <div className="card-body">
-                            <img src={`https://developer.accuweather.com/sites/default/files/${fn}-s.png`} width="75px" height="45px" alt="img"/>
-                                <div>
-                                    <h5 className="card-title">
-                                        {this.state.searchVal} </h5>
-                                    <p className="card-text">
-                                        {CW.Temperature.Metric.Value}&deg; {CW.Temperature.Metric.Unit}</p>
-                                </div>
+            <div className="form">
+                <input name="city"
+                    onChange={this.handleChange.bind(this) }
+                    className="form-control form-control-lg"
+                    type="text"
+                    placeholder={this.state.city}/>
+                <button onClick={this.loadWeather.bind(this)}
+                    className="btn btn-primary mb-2">Search</button>
+            </div>
+            {this.state.weather.map((CW, i) =>
+            <div key={i}> 
+                <div className="divy2">
+                    <div className="card fifty1">
+                        <div className="card-body">
+                        <img src={`https://developer.accuweather.com/sites/default/files/${fn}-s.png`} width="75px" height="45px" alt="img"/>
+                            <div>
+                                <h5 className="card-title">
+                                    {this.state.searchVal} </h5>
+                                <p className="card-text">
+                                    {CW.Temperature.Metric.Value}&deg; {CW.Temperature.Metric.Unit}</p>
                             </div>
                         </div>
-                        <div className="fifty2">
-                            <p className="faveHeart">
-                                <span>&hearts;</span>
-                                <button onClick={this.addFave.bind(this, this.state.city)} className="boxy btn btn-outline-danger">Add To Favorites</button>
-                            </p>
-                        </div>
-                </div>
-                <div>
-                <h2 className="forecast">{CW.WeatherText}</h2>
-               </div>
-               </div>
-                )}
+                    </div>
+                    <div className="fifty2">
+                        <p className="faveHeart">
+                            <span>&hearts;</span>
+                            <button onClick={this.addFave.bind(this, this.state.city)} className="boxy btn btn-outline-danger">Add To Favorites</button>
+                        </p>
+                    </div>
             </div>
+            <div>
+            <h2 className="forecast">{CW.WeatherText}</h2>
+            </div>
+            </div>
+            )}
             <div className="extForecast">
             {this.state.forecast.map((f, i) => 
                 <Card 
@@ -114,10 +112,10 @@ addFave(city, key, temp, unit, cityText){
 async loadWeather(city) {
     city = this.state.city;
 
-    let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let EXPOSEAPIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
     let GOODAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
 
-    let GOODAPIkey2 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
+    let APIkey = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
     let ALSOGOODAPIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
     let GOOODAPIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
     let GOODYAPIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
