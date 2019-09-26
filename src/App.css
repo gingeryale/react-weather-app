@@ -120,8 +120,11 @@ h2.forecast{
   margin-bottom: 1.5rem;
 }
 
-.faveHeart{
+.faveHeart span.rheart{
   color:red;
+}
+.faveHeart span.gHeart{
+  color:grey;
 }
 .faveHeart span.boxy {
   font-weight:bold;
