@@ -10,14 +10,6 @@ if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== 
 }
 
 
-function reduceArray(arr, comp) {
-    const singleVal = arr.map(e => e[comp])
-      .map((e, i, final) => final.indexOf(e) === i && i)
-        .filter(e => arr[e]).map(e => arr[e]);
-     return singleVal;
-  }
-  
-  var finalArray = reduceArray(lsFaves,'city');
 
 
 
@@ -25,7 +17,7 @@ function reduceArray(arr, comp) {
 class Favorites extends Component{
 
     state={
-        getFavorites: finalArray  
+        getFavorites: lsFaves  
     }
 
     componentDidMount(){
@@ -68,7 +60,7 @@ class Favorites extends Component{
 
 
     async updateData() { 
-    let APIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
+    let APIkey = `fpziVmcfHSFtFmX8UGVPwgkAb5nJe0rM`;
     let thisState = this;
     let keyarr = JSON.parse(localStorage.getItem('faves'));
     keyarr ?  keyarr = JSON.parse(localStorage.getItem('faves')) : keyarr = 215854;

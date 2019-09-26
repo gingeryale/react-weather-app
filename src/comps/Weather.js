@@ -6,20 +6,6 @@ import Card from './Card';
 class Weather extends Component {
 
     state = {
-        // weather:[
-        //     {"LocalObservationDateTime":"2019-09-25T00:27:00-04:00",
-        //     "EpochTime":1569385620,
-        //     "WeatherText":"Clear",
-        //     "WeatherIcon":33,
-        //     "HasPrecipitation":false,
-        //     "PrecipitationType":null,
-        //     "IsDayTime":false,
-        //     "Temperature":
-        //         {"Metric":
-        //             {"Value":18.3,"Unit":"C","UnitType":17},
-        //             "Imperial":{"Value":65.0,"Unit":"F","UnitType":18}
-        //         },
-        //             }],
         weather:[],
         searchVal:'',
         cityKey:'215854',
@@ -37,11 +23,12 @@ class Weather extends Component {
     }
 
     render() {
-        var fn = this.state.weather.map(val =>
+        let fn = this.state.weather.map(val =>
         val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
-
-        var faveSate = this.state.isFavorite;
+        let faveSate = this.state.isFavorite;
+        let heartClass = this.state.isFavorite;
         faveSate ? faveSate=(<div onClick={this.handleUnFave.bind(this, this.state.city)}>REMOVE FAVE</div>) : faveSate=(<div onClick={this.handleFave.bind(this, this.state.city)}>ADD FAVE</div>);
+        heartClass ? heartClass=("rheart") : heartClass=("gheart");
         return (
         <div>
             <div className="form">
@@ -70,7 +57,7 @@ class Weather extends Component {
                     </div>
                     <div className="fifty2">
                         <p className="faveHeart">
-                            <span>&hearts;</span>
+                            <span className={heartClass}>&hearts;</span>
                             <button className="boxy btn btn-outline-danger">{faveSate}</button>
                         </p>
                     </div>
@@ -104,7 +91,7 @@ isFaved(ccity){
     if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
         var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
     if (lsFaveArr.filter(el => el.city === ccity).length > 0) {
-        this.setState({isFavorite:true})
+        this.setState({isFavorite:true});
       }else{
         this.setState({isFavorite:false})
       }
@@ -150,7 +137,7 @@ handleUnFave(ccity){
 // fetch data
 async loadWeather(city) {
     city = this.state.city;
-    let APIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
+    let APIkey = `fpziVmcfHSFtFmX8UGVPwgkAb5nJe0rM`;
 
     try {
         var res = await fetch("https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
