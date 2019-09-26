@@ -33,7 +33,7 @@ class Favorites extends Component{
         //this.loadWeather();
         const getFavorites = JSON.parse( localStorage.getItem( "faves" ) );
         this.setState( { getFavorites } );
-        //this.updateData();
+        this.updateData();
     }
 
     render(){
@@ -65,13 +65,12 @@ class Favorites extends Component{
         let store = localStorage.getItem('city');
         if(store == null){
             localStorage.setItem('Favorites', []);
-            
-            }
+        }
     }
 
 
     async updateData() { 
-    let APIkey = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
+    let APIkey = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
     let thisState = this;
     /////////////////////// changed from localStore to finalArray
     let keyarr = finalArray;

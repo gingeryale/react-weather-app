@@ -44,7 +44,8 @@ class Weather extends Component {
 
     render() {
         var fn = this.state.weather.map(val =>
-            val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
+        val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
+
         var faveSate = this.state.isFavorite;
         faveSate ? faveSate=(<div onClick={this.handleUnFave.bind(this, this.state.city)}>REMOVE FAVE</div>) : faveSate=(<div onClick={this.handleFave.bind(this, this.state.city)}>ADD FAVE</div>);
         return (
@@ -104,7 +105,6 @@ class Weather extends Component {
     }
 
 isFaved(ccity){
-    debugger;
     ccity = this.state.searchVal;
     var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
     if (lsFaveArr.filter(el => el.city === ccity).length > 0) {
@@ -133,8 +133,16 @@ handleFave(city, key, temp, unit, cityText){
         this.setState({isFavorite:true});
     }
 }
-handleUnFave(){
+handleUnFave(ccity){
+    debugger;
     console.log('unfave');
+    var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
+    for(let i =0; i < lsFaveArr.length; i++){
+        if(lsFaveArr[i].city == ccity){
+            lsFaveArr.splice(i, 1);
+        }
+    }
+    localStorage.setItem('faves', JSON.stringify(lsFaveArr));
 }
 
 // fetch data
