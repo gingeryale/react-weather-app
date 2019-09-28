@@ -166,7 +166,7 @@ handleUnFave(_key){
 
 // fetch data
 async loadCityWeather(_city){
-    let devID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    let devID = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ `;
     _city = this.state.city || 215854;
     if(_city == 215854){
         let r = await fetch("https://dataservice.accuweather.com/currentconditions/v1/215854?apikey=" + devID);
@@ -223,7 +223,7 @@ handleCitySearch(e){
 
 
 async loadCityWeatherSearch(_key){
-    let devID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    let devID = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ `;
     let cityKey = _key;
 
     var res2 = await fetch("https://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + devID);
