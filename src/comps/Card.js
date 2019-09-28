@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import moment from 'moment';
 
 class Card extends React.Component {
@@ -11,33 +11,31 @@ class Card extends React.Component {
     let condition;
     this.props.condition ?  condition = (<h5>{this.props.condition}</h5>) : condition = (null);
     let removeBTN;
-    this.props.condition ?  removeBTN = (<div><button className={this.props.city} onClick={this.removeMe.bind(this)} className="btn-sm btn btn-outline-danger">x</button></div>) : removeBTN = (null);
+    this.props.condition ?  
+    removeBTN = (<div><button onClick={this.removeMe.bind(this)} className="btn-sm btn btn-outline-danger">x</button></div>) :
+    removeBTN = (null);
+    let location;
+    this.props.locKey ? location=(<span>{this.props.cityDetail}</span>) : location=(null);
      return(
 <section className="card weather" data={this.props.city}>
   <div className="card-body">
     {header}
-    <p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
+    {location}
+    <p className="card-text">{this.props.temp}&deg;</p>
     {condition}
     {removeBTN}
   </div>
 </section>
     );
-   
-    
   }
 
-  removeMe(e){
-    console.log(e);
-    
-    var ccity = this.props.city;
+  removeMe(e){  
+    var _key = this.props.locKey;
     var farray = JSON.parse(localStorage.getItem("faves"));
-    console.log("aa", farray);
     for (var i =0; i< farray.length; i++) {
     var elm = farray[i];
-      if (elm.city === ccity) {
+      if (elm.key === _key) {
       farray.splice(i, 1);
-      } else {
-        console.log(farray);
       }
 }
 let strinArra = JSON.stringify(farray);
