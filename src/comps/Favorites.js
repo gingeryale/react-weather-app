@@ -40,6 +40,7 @@ class Favorites extends Component{
                     unit={f.unit}
                     condition={f.cityText}
                     temp={f.temp}
+                    locKey = {f.key}
                      />
                 )}
             </div>
@@ -59,7 +60,6 @@ class Favorites extends Component{
     let appID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
     let thisState = this;
     let keyarr = JSON.parse(localStorage.getItem('faves'));
-    //keyarr ?  keyarr = JSON.parse(localStorage.getItem('faves')) : keyarr = 215854;
     for(let i=0;i<keyarr.length; i++) {
         await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + appID)
         .then(res => {
@@ -74,7 +74,7 @@ class Favorites extends Component{
         alert(error);
         });
     }
-    thisState.setState({getFavorites: keyarr})
+    thisState.setState({getFavorites: keyarr});
 }
 
 }

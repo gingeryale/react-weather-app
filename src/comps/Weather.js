@@ -246,53 +246,6 @@ async loadCityWeatherSearch(fcityKey){
 
 
 
-// async loadWeather(city) {
-//     city = this.state.city;
-
-//     let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-//     let USINGAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-
-//     let APIkey999 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
-//     let _APIkey = `999`
-//     let APIkey0000 = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
-//     let ___b_APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
-//     let ___APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
-
-//     let SENTAPIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
-//     let NOWNOWAPIkey = `fpziVmcfHSFtFmX8UGVPwgkAb5nJe0rM`;
-
-//     try {
-//         var res = await fetch("https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
-//       } catch(err) {
-//         alert("Couldn't find that location, please make sure you spelled it correctly");
-//         return
-//       }
-       
-//         var jsonDATA = await res.json();
-//         try {
-//         var cityKey = jsonDATA[0].Key;
-//         this.setState({searchVal: city});
-//         this.setState({cityKey: cityKey});
-//         }catch(err){
-//             alert("An Error occurred, try again, or check your spelling");
-//             return;
-//         }
-//         var res2 = await fetch("https://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
-//         var jsonCityData = await res2.json();
-//         this.setState({ weather : jsonCityData });
-//         this.setState({unit: jsonCityData[0].Temperature.Metric.Unit}); 
-//         this.setState({cityTemp: jsonCityData[0].Temperature.Metric.Value});
-//         this.setState({cityText:jsonCityData[0].WeatherText}); 
-//         try{
-//             var res3 = await fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
-//             var jsonForecastData = await res3.json();
-//             this.setState({ forecast : jsonForecastData.DailyForecasts });  
-//         }catch(err){
-//             alert("An Error occurred, try again");
-//             return;
-//         }
-//         this.isFaved();
-//     }
 
 }
 
