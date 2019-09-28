@@ -55,11 +55,45 @@ span.brand {
   color: #09d3ac;
 }
 
+.searchForm{
+  position: relative;
+}
 
 .weatherForm input{
   width:39vw;
 }
-
+.dropdown{
+  position: absolute;
+  top:-1000px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index:3;
+  background-color: white;
+}
+.dropdown.open {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 44vw;
+  border: 1px solid black;
+  min-height: 2rem;
+  max-height: 10rem;
+  overflow-y: scroll;
+  opacity: 1;
+  margin: auto;
+}
+.dropdown.open ul{
+ padding-left:0.8rem;
+ padding-top:.25rem;
+}
+.dropdown.open li{
+  list-style-type: none;
+}
+.dropdown.open li:hover{
+  background-color: #fabd7e
+}
 .header{
   width: 100%;
 display: flex;

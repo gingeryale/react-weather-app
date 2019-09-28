@@ -10,10 +10,6 @@ if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== 
 }
 
 
-
-
-
-
 class Favorites extends Component{
 
     state={
@@ -39,7 +35,7 @@ class Favorites extends Component{
                 <div className="faves">
                {this.state.getFavorites.map((f, i) => 
                 <Card 
-                    key={i} 
+                    key={f.key} 
                     city={f.city} 
                     unit={f.unit}
                     condition={f.cityText}
@@ -60,18 +56,18 @@ class Favorites extends Component{
 
 
     async updateData() { 
-    let APIkey = `fpziVmcfHSFtFmX8UGVPwgkAb5nJe0rM`;
+    let appID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
     let thisState = this;
     let keyarr = JSON.parse(localStorage.getItem('faves'));
-    keyarr ?  keyarr = JSON.parse(localStorage.getItem('faves')) : keyarr = 215854;
+    //keyarr ?  keyarr = JSON.parse(localStorage.getItem('faves')) : keyarr = 215854;
     for(let i=0;i<keyarr.length; i++) {
-        await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + APIkey)
+        await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + appID)
         .then(res => {
         if(res.ok) return res.json();
         throw new Error(res.statusText);
         })
         .then(function handleData(data) {
-          keyarr[i].cityText = data[0].WeatherText
+          keyarr[i].cityText = data[0].WeatherText;
           keyarr[i].temp = data[0].Temperature.Metric.Value;
         })
         .catch(function handleError(error) {

@@ -13,10 +13,10 @@ class Card extends React.Component {
     let removeBTN;
     this.props.condition ?  removeBTN = (<div><button className={this.props.city} onClick={this.removeMe.bind(this)} className="btn-sm btn btn-outline-danger">x</button></div>) : removeBTN = (null);
      return(
-<section className="card weather" data={this.props.city}>
+<section key={this.props.key} className="card weather" data={this.props.city}>
   <div className="card-body">
     {header}
-    <p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
+    <p className="card-text">{this.props.temp}&deg;</p>
     {condition}
     {removeBTN}
   </div>
@@ -26,15 +26,16 @@ class Card extends React.Component {
     
   }
 
-  removeMe(e){
-    console.log(e);
-    
-    var ccity = this.props.city;
+  removeMe(e){  
+    console.log("e", e);
+    console.log("this", this);  
+    debugger;
+    var _key = this.props.key;
     var farray = JSON.parse(localStorage.getItem("faves"));
     console.log("aa", farray);
     for (var i =0; i< farray.length; i++) {
     var elm = farray[i];
-      if (elm.city === ccity) {
+      if (elm.key === _key) {
       farray.splice(i, 1);
       } else {
         console.log(farray);

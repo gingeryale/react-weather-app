@@ -18,7 +18,8 @@ class Weather extends Component {
         cityID:'',
         forecast:[],
         setFavorites:"",
-        isFavorite: false
+        isFavorite: false,
+        dropdown: false
     }
 
     componentDidMount() {
@@ -35,11 +36,22 @@ class Weather extends Component {
         let details;
         let cityDetails = this.state.cityID;
         details = cityDetails && (<span>{this.state.cityID} / {this.state.cityCountry}</span>)
-
+        let dropDownState = this.state.dropdown;
+        let dropDownClass;
+        dropDownState ? dropDownClass=("dropdown open"): dropDownClass=("dropdown")    
         return (
-        <div>
-            <button onClick={this.loadCityWeather.bind(this)}>load</button>
-            <div>
+        <div>   
+            <div className="searchForm">        
+            <div className="form">
+                <input name="city"
+                    onChange={this.handleChange.bind(this) }
+                    className="form-control form-control-lg"
+                    type="text"
+                    placeholder={this.state.city}/>
+                <button onClick={this.loadCityWeather.bind(this)}
+                    className="btn btn-primary mb-2">Search</button>
+                </div>
+                <div className={dropDownClass}>
                 <ul>
                 {this.state.cityData.map((c, i) => 
                     <li key={c.Key}
@@ -52,15 +64,6 @@ class Weather extends Component {
                 </li>)}
                 </ul>
             </div>
-           
-            <div className="form">
-                <input name="city"
-                    onChange={this.handleChange.bind(this) }
-                    className="form-control form-control-lg"
-                    type="text"
-                    placeholder={this.state.city}/>
-                <button onClick={this.loadCityWeather.bind(this)}
-                    className="btn btn-primary mb-2">Search</button>
             </div>
             {this.state.weather.map((CW, i) =>
             <div key={i}> 
@@ -160,13 +163,13 @@ handleUnFave(_key){
 
 // fetch data
 async loadCityWeather(_city){
-    let devID = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let devID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
     _city = this.state.city || 215854;
     if(_city == 215854){
-        
         let r = await fetch("https://dataservice.accuweather.com/currentconditions/v1/215854?apikey=" + devID);
         let jsonCityData = await r.json();
         this.setState({searchVal:'Tel Aviv'});
+        this.setState({cityKey: 215854});
         this.setState({ weather : jsonCityData });
         this.setState({unit: jsonCityData[0].Temperature.Metric.Unit}); 
         this.setState({cityTemp: jsonCityData[0].Temperature.Metric.Value});
@@ -174,7 +177,7 @@ async loadCityWeather(_city){
         try{
             var res3 = await fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/215854?apikey=" + devID+"&metric=true");
             var jsonForecastData = await res3.json();
-            this.setState({ forecast : jsonForecastData.DailyForecasts });  
+            this.setState({ forecast : jsonForecastData.DailyForecasts });
         }catch(err){
             alert("An Error occurred, try again");
             return;
@@ -190,14 +193,15 @@ async loadCityWeather(_city){
            
             var worldCities = await res.json();
             this.setState({cityData: worldCities});
-            console.log(worldCities);
-
+            if(worldCities.length > 0){
+                this.setState({dropdown:true});
+            }
             this.isFaved();
     }
 }
 
 handleCitySearch(e){
-    let _name = e.target.dataset.city;
+    let _name = this.state.city;
     this.setState({city:_name});
 
     let _city = e.target.dataset.city;
@@ -215,11 +219,12 @@ handleCitySearch(e){
 
 
 async loadCityWeatherSearch(fcityKey){
-    let devID = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+    let devID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
     let cityKey = fcityKey;
-debugger;
+
     var res2 = await fetch("https://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + devID);
         var jsonCityData = await res2.json();
+        this.setState({dropdown:false});
         this.setState({ weather : jsonCityData });
         this.setState({unit: jsonCityData[0].Temperature.Metric.Unit}); 
         this.setState({cityTemp: jsonCityData[0].Temperature.Metric.Value});
@@ -241,7 +246,7 @@ async loadWeatherHERE(city) {
     city = this.state.city;
 
     let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let ____APIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    let USINGAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
 
     let APIkey999 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
     let _APIkey = `999`
