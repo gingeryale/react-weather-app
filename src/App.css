@@ -101,22 +101,27 @@ justify-content: start;
 }
 
 .card{
-  max-width:22%;
   width: 100%;
-  max-width: 9rem;
+  max-width: 7rem;
   margin: 1rem;
 }
 
-.card .weather{
+.card.weather{
   display: inline-flex;
   justify-content: center;
   flex-direction: row;
+  width: 100%;
+  max-width: 12rem;
 }
+
 
 main.weatherForm .form{
   display: flex;
   justify-content: center;
   margin:1rem 0;
+  width: 100%;
+  max-width: 60vw;
+  margin: 0 auto;
 }
 
 .wrapper{
@@ -127,8 +132,9 @@ main.weatherForm .form{
 }
 
 .weatherForm{
-  max-width: 60vw;
-    margin: 1rem auto;
+  width:100%;
+  max-width: 71vw;
+  margin: 1rem auto;
 }
 
 .footer{
@@ -152,12 +158,14 @@ h2.forecast{
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+  max-width: 54vw;
+  margin: 0 auto;
 }
 
 .faveHeart span.rheart{
   color:red;
 }
-.faveHeart span.gHeart{
+.faveHeart span.gheart{
   color:grey;
 }
 .faveHeart span.boxy {
@@ -176,7 +184,7 @@ h2.forecast{
 
 .card.fifty1{
   width: 100%;
-  max-width: 30%;
+  max-width: 40%;
 }
 
 .card.fifty1 > .card-body{
