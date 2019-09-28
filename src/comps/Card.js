@@ -30,14 +30,12 @@ class Card extends React.Component {
   }
 
   removeMe(e){  
-    var _key = this.props.locKey;
-    var farray = JSON.parse(localStorage.getItem("faves"));
+    let _key = this.props.locKey;
+    let farray = JSON.parse(localStorage.getItem("faves"));
     for (var i =0; i< farray.length; i++) {
-    var elm = farray[i];
+    let elm = farray[i];
       if (elm.key === _key) {
       farray.splice(i, 1);
-      } else {
-        console.log(farray);
       }
 }
 let strinArra = JSON.stringify(farray);

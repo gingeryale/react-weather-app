@@ -1,35 +1,36 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../App.css';
 import Card from './Card';
 
-if((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)){
+if ((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)) {
     var lsFaves = JSON.parse(localStorage.getItem('faves'));
 } else {
-    var lsFaves=[];
+    var lsFaves = [];
     localStorage.setItem("faves", JSON.stringify(lsFaves));
 }
 
 
-class Favorites extends Component{
 
-    state={
-        getFavorites: lsFaves  
+class Favorites extends Component {
+
+    state = {
+        getFavorites: lsFaves
     }
 
-    componentDidMount(){
-        const getFavorites = JSON.parse( localStorage.getItem( "faves" ) );
-        this.setState( { getFavorites } );
+    componentDidMount() {
+        const getFavorites = JSON.parse(localStorage.getItem("faves"));
+        this.setState({ getFavorites });
         this.updateData();
     }
 
-    render(){
+    render() {
 
         let message;
-        this.state.getFavorites.length !== 0 ? 
-        message = (<h5 className="display-4 text-center">Your list of favorites</h5>) : 
-        message = (<h5 className="display-4 text-center">You have zero favorites, start adding some!</h5>);
+        this.state.getFavorites.length !== 0 ?
+            message = (<h5 className="display-4 text-center">Your list of favorites</h5>) :
+            message = (<h5 className="display-4 text-center">You have zero favorites, start adding some!</h5>);
 
-        return(
+        return (
             <div>
                 <div>{message}</div>
                 <div className="faves">
@@ -44,21 +45,21 @@ class Favorites extends Component{
                     cityDetail = {f.cityID}
                      />
                 )}
-            </div>
+                </div>
             </div>
         )
     }
 
-    localStorageHandle(){
+    localStorageHandle() {
         let store = localStorage.getItem('city');
-        if(store == null){
+        if (store == null) {
             localStorage.setItem('Favorites', []);
         }
     }
 
 
     async updateData() { 
-    let appID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+    let appID = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
     let thisState = this;
     let keyarr = JSON.parse(localStorage.getItem('faves'));
     for(let i=0;i<keyarr.length; i++) {
@@ -77,6 +78,7 @@ class Favorites extends Component{
     }
     thisState.setState({getFavorites: keyarr});
 }
+
 
 }
 
