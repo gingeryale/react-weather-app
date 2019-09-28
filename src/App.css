@@ -210,6 +210,17 @@ h2.forecast{
   .weatherForm input {
     width: 60vw;
   }
+  .dropdown{
+    top:-1000px;
+  }
+  .dropdown.open {
+    width: 100%;
+    max-width: 60vw;
+    max-height: 18rem;
+  }
+  .dropdown.open li{
+    line-height: 2.5;
+  }
   .card{
     margin-top:.5rem;
     width: 100%;
