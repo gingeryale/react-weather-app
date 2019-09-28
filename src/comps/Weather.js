@@ -31,8 +31,8 @@ class Weather extends Component {
         val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
         let faveSate = this.state.isFavorite;
         let heartClass = this.state.isFavorite;
-        faveSate ? faveSate=(<div onClick={this.handleUnFave.bind(this, this.state.city)}>REMOVE FAVE</div>) : 
-        faveSate=(<div onClick={this.handleFave.bind(this, this.state.city)}>ADD FAVE</div>);
+        faveSate ? faveSate=(<div className="boxy" onClick={this.handleUnFave.bind(this, this.state.city)}>REMOVE FAVE</div>) : 
+        faveSate=(<div className="boxy" onClick={this.handleFave.bind(this, this.state.city)}>ADD FAVE</div>);
         heartClass ? heartClass=("rheart") : heartClass=("gheart");
         let details;
         let cityDetails = this.state.cityID;
@@ -165,7 +165,7 @@ handleUnFave(_key){
 
 // fetch data
 async loadCityWeather(_city){
-    let devID = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj `;
+    let devID = `GUSx7QFPDOnQKVDfSfHprs8y4DlRMBzA `;
     _city = this.state.city || 215854;
     if(_city == 215854){
         let r = await fetch("https://dataservice.accuweather.com/currentconditions/v1/215854?apikey=" + devID);
@@ -179,7 +179,7 @@ async loadCityWeather(_city){
         this.setState({cityText:jsonCityData[0].WeatherText}); 
         try{
             var res3 = await fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/215854?apikey=" + devID+"&metric=true");
-            var jsonForecastData = await res3.json();
+            let jsonForecastData = await res3.json();
             this.setState({ forecast : jsonForecastData.DailyForecasts });
         }catch(err){
             alert("An Error occurred, try again");
@@ -194,7 +194,10 @@ async loadCityWeather(_city){
             return
           }
            
-            var worldCities = await res.json();
+            let worldCities = await res.json();
+            if(worldCities.length == 0){
+                alert("Error: Check your spelling and try again")
+            }
             this.setState({cityData: worldCities});
             if(worldCities.length > 0){
                 this.setState({dropdown:true});
@@ -222,13 +225,13 @@ handleCitySearch(e){
 
 
 async loadCityWeatherSearch(_key){
-    let devID = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj `;
+    let devID = `GUSx7QFPDOnQKVDfSfHprs8y4DlRMBzA`;
     let cityKey = _key;
 
     var res2 = await fetch("https://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + devID);
         var jsonCityData = await res2.json();
         this.setState({dropdown:false});
-        this.setState({ weather : jsonCityData });
+        this.setState({weather : jsonCityData });
         this.setState({unit: jsonCityData[0].Temperature.Metric.Unit}); 
         this.setState({cityTemp: jsonCityData[0].Temperature.Metric.Value});
         this.setState({cityText:jsonCityData[0].WeatherText}); 

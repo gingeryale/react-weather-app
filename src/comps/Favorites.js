@@ -59,7 +59,7 @@ class Favorites extends Component {
 
 
     async updateData() { 
-    let appID = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
+    let appID = `GUSx7QFPDOnQKVDfSfHprs8y4DlRMBzA`;
     let thisState = this;
     let keyarr = JSON.parse(localStorage.getItem('faves'));
     for(let i=0;i<keyarr.length; i++) {

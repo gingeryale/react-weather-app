@@ -10,7 +10,7 @@ function AppRouter() {
       <Router>
         <div>
           <div className="bar">
-            <span className="brand">Herolo Weather App</span>
+            <span className="brand"><Link to="/">Herolo Weather App</Link></span>
             <ul>
               <li>
                 <Link to="/">Home</Link>
