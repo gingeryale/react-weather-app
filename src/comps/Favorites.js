@@ -41,6 +41,7 @@ class Favorites extends Component{
                     condition={f.cityText}
                     temp={f.temp}
                     locKey = {f.key}
+                    cityDetail = {f.cityID}
                      />
                 )}
             </div>

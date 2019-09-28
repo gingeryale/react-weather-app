@@ -15,6 +15,7 @@ class Card extends React.Component {
     removeBTN = (<div><button onClick={this.removeMe.bind(this)} className="btn-sm btn btn-outline-danger">x</button></div>) :
     removeBTN = (null);
     let location;
+    this.props.locKey ? location=(<span>{this.props.cityDetail}</span>) : location=(null);
      return(
 <section className="card weather" data={this.props.city}>
   <div className="card-body">
@@ -26,16 +27,11 @@ class Card extends React.Component {
   </div>
 </section>
     );
-   
-    
   }
 
   removeMe(e){  
-    console.log("e", e);
-    console.log("this", this);  
     var _key = this.props.locKey;
     var farray = JSON.parse(localStorage.getItem("faves"));
-    console.log("aa", farray);
     for (var i =0; i< farray.length; i++) {
     var elm = farray[i];
       if (elm.key === _key) {

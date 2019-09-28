@@ -222,9 +222,9 @@ handleCitySearch(e){
 }
 
 
-async loadCityWeatherSearch(fcityKey){
+async loadCityWeatherSearch(_key){
     let devID = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
-    let cityKey = fcityKey;
+    let cityKey = _key;
 
     var res2 = await fetch("https://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + devID);
         var jsonCityData = await res2.json();
