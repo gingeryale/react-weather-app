@@ -13,7 +13,7 @@ class Card extends React.Component {
     let removeBTN;
     this.props.condition ?  removeBTN = (<div><button className={this.props.city} onClick={this.removeMe.bind(this)} className="btn-sm btn btn-outline-danger">x</button></div>) : removeBTN = (null);
      return(
-<section key={this.props.key} className="card weather" data={this.props.city}>
+<section className="card weather" data={this.props.city}>
   <div className="card-body">
     {header}
     <p className="card-text">{this.props.temp}&deg;</p>

@@ -24,6 +24,7 @@ class Weather extends Component {
 
     componentDidMount() {
         //this.loadWeather();
+        this.loadCityWeather();
     }
 
     render() {
@@ -31,7 +32,8 @@ class Weather extends Component {
         val.WeatherIcon = ("0" + val.WeatherIcon).slice(-2));
         let faveSate = this.state.isFavorite;
         let heartClass = this.state.isFavorite;
-        faveSate ? faveSate=(<div onClick={this.handleUnFave.bind(this, this.state.city)}>REMOVE FAVE</div>) : faveSate=(<div onClick={this.handleFave.bind(this, this.state.city)}>ADD FAVE</div>);
+        faveSate ? faveSate=(<div onClick={this.handleUnFave.bind(this, this.state.city)}>REMOVE FAVE</div>) : 
+        faveSate=(<div onClick={this.handleFave.bind(this, this.state.city)}>ADD FAVE</div>);
         heartClass ? heartClass=("rheart") : heartClass=("gheart");
         let details;
         let cityDetails = this.state.cityID;
@@ -151,8 +153,9 @@ handleFave(_city,_key,_temp,_unit,_cityText,_cityID){
 }
 
 handleUnFave(_key){
+    _key = this.state.cityKey;
     var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
-    for(let i =0; i < lsFaveArr.length; i++){
+    for(let i=0; i < lsFaveArr.length; i++){
         if(lsFaveArr[i].key == _key){
             lsFaveArr.splice(i, 1);
         }
@@ -170,7 +173,8 @@ async loadCityWeather(_city){
         let jsonCityData = await r.json();
         this.setState({searchVal:'Tel Aviv'});
         this.setState({cityKey: 215854});
-        this.setState({ weather : jsonCityData });
+        
+        this.setState({weather : jsonCityData});
         this.setState({unit: jsonCityData[0].Temperature.Metric.Unit}); 
         this.setState({cityTemp: jsonCityData[0].Temperature.Metric.Value});
         this.setState({cityText:jsonCityData[0].WeatherText}); 
@@ -242,53 +246,53 @@ async loadCityWeatherSearch(fcityKey){
 
 
 
-async loadWeatherHERE(city) {
-    city = this.state.city;
+// async loadWeather(city) {
+//     city = this.state.city;
 
-    let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
-    let USINGAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
+//     let APIkey = `I2G37YRANeCZFbAm8syetLLmqPxx28AO`;
+//     let USINGAPIkey = `xL54tACtYJDR4TsFpdD9RhC5LP3fPcTY`;
 
-    let APIkey999 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
-    let _APIkey = `999`
-    let APIkey0000 = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
-    let ___b_APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
-    let ___APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
+//     let APIkey999 = `0ihABqFzGmWUxk3dPNte1yR0zB12eGXj`;
+//     let _APIkey = `999`
+//     let APIkey0000 = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+//     let ___b_APIkey = `vuyBU7N4Uz4AU5LytqXRWOgnSwYJTnVQ`;
+//     let ___APIkey = ` HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob `;
 
-    let SENTAPIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
-    let NOWNOWAPIkey = `fpziVmcfHSFtFmX8UGVPwgkAb5nJe0rM`;
+//     let SENTAPIkey = `xxuft4RpVBzDuGgZnwOyp2jBAJw5DmCi`;
+//     let NOWNOWAPIkey = `fpziVmcfHSFtFmX8UGVPwgkAb5nJe0rM`;
 
-    try {
-        var res = await fetch("https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
-      } catch(err) {
-        alert("Couldn't find that location, please make sure you spelled it correctly");
-        return
-      }
+//     try {
+//         var res = await fetch("https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + APIkey + "&q=" + city);
+//       } catch(err) {
+//         alert("Couldn't find that location, please make sure you spelled it correctly");
+//         return
+//       }
        
-        var jsonDATA = await res.json();
-        try {
-        var cityKey = jsonDATA[0].Key;
-        this.setState({searchVal: city});
-        this.setState({cityKey: cityKey});
-        }catch(err){
-            alert("An Error occurred, try again, or check your spelling");
-            return;
-        }
-        var res2 = await fetch("https://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
-        var jsonCityData = await res2.json();
-        this.setState({ weather : jsonCityData });
-        this.setState({unit: jsonCityData[0].Temperature.Metric.Unit}); 
-        this.setState({cityTemp: jsonCityData[0].Temperature.Metric.Value});
-        this.setState({cityText:jsonCityData[0].WeatherText}); 
-        try{
-            var res3 = await fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
-            var jsonForecastData = await res3.json();
-            this.setState({ forecast : jsonForecastData.DailyForecasts });  
-        }catch(err){
-            alert("An Error occurred, try again");
-            return;
-        }
-        this.isFaved();
-    }
+//         var jsonDATA = await res.json();
+//         try {
+//         var cityKey = jsonDATA[0].Key;
+//         this.setState({searchVal: city});
+//         this.setState({cityKey: cityKey});
+//         }catch(err){
+//             alert("An Error occurred, try again, or check your spelling");
+//             return;
+//         }
+//         var res2 = await fetch("https://dataservice.accuweather.com/currentconditions/v1/" + cityKey + "?apikey=" + APIkey);
+//         var jsonCityData = await res2.json();
+//         this.setState({ weather : jsonCityData });
+//         this.setState({unit: jsonCityData[0].Temperature.Metric.Unit}); 
+//         this.setState({cityTemp: jsonCityData[0].Temperature.Metric.Value});
+//         this.setState({cityText:jsonCityData[0].WeatherText}); 
+//         try{
+//             var res3 = await fetch("https://dataservice.accuweather.com/forecasts/v1/daily/5day/" + cityKey + "?apikey=" + APIkey+"&metric=true");
+//             var jsonForecastData = await res3.json();
+//             this.setState({ forecast : jsonForecastData.DailyForecasts });  
+//         }catch(err){
+//             alert("An Error occurred, try again");
+//             return;
+//         }
+//         this.isFaved();
+//     }
 
 }
 
