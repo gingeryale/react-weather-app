@@ -23,7 +23,6 @@ class Weather extends Component {
     }
 
     componentDidMount() {
-        //this.loadWeather();
         this.loadCityWeather();
     }
 
