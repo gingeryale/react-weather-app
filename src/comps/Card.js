@@ -17,13 +17,17 @@ class Card extends React.Component {
     let location;
     this.props.locKey ? location = (<span>{this.props.cityDetail}</span>) : location = (null);
     let cardCSS;
-    this.props.city ? cardCSS = ("card fave") : cardCSS = ("card weather")
+    this.props.city ? cardCSS = ("card fave") : cardCSS = ("card weather");
+    let weatherData;
+    this.props.tempL ? weatherData = (<p className="card-text">{this.props.tempL} - {this.props.tempH}&deg; {this.props.unit}</p>
+    ) : weatherData = (<p className="card-text">{this.props.temp}&deg; {this.props.unit}</p>
+    )
     return (
       <section className={cardCSS} data={this.props.city}>
         <div className="card-body">
           {header}
           {location}
-          <p className="card-text">{this.props.temp}&deg;</p>
+          {weatherData}
           {condition}
           {removeBTN}
         </div>

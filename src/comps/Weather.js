@@ -95,7 +95,8 @@ class Weather extends Component {
                         <Card
                             key={i}
                             day={f.EpochDate}
-                            temp={f.Temperature.Maximum.Value}
+                            tempH={f.Temperature.Maximum.Value}
+                            tempL={f.Temperature.Minimum.Value}
                             unit={f.Temperature.Maximum.Unit} />
                     )}
                 </div>
