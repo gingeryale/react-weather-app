@@ -34,17 +34,17 @@ class Favorites extends Component {
             <div>
                 <div>{message}</div>
                 <div className="faves">
-               {this.state.getFavorites.map((f, i) => 
-                <Card 
-                    key={f.key} 
-                    city={f.city} 
-                    unit={f.unit}
-                    condition={f.cityText}
-                    temp={f.temp}
-                    locKey = {f.key}
-                    cityDetail = {f.cityID}
-                     />
-                )}
+                    {this.state.getFavorites.map((f, i) =>
+                        <Card
+                            key={f.key}
+                            city={f.city}
+                            unit={f.unit}
+                            condition={f.cityText}
+                            temp={f.temp}
+                            locKey={f.key}
+                            cityDetail={f.cityID}
+                        />
+                    )}
                 </div>
             </div>
         )
@@ -58,26 +58,26 @@ class Favorites extends Component {
     }
 
 
-    async updateData() { 
-    let appID = `GUSx7QFPDOnQKVDfSfHprs8y4DlRMBzA`;
-    let thisState = this;
-    let keyarr = JSON.parse(localStorage.getItem('faves'));
-    for(let i=0;i<keyarr.length; i++) {
-        await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + appID)
-        .then(res => {
-        if(res.ok) return res.json();
-        throw new Error(res.statusText);
-        })
-        .then(function handleData(data) {
-          keyarr[i].cityText = data[0].WeatherText;
-          keyarr[i].temp = data[0].Temperature.Metric.Value;
-        })
-        .catch(function handleError(error) {
-        alert(error);
-        });
+    async updateData() {
+        let appID = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+        let thisState = this;
+        let keyarr = JSON.parse(localStorage.getItem('faves'));
+        for (let i = 0; i < keyarr.length; i++) {
+            await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + appID)
+                .then(res => {
+                    if (res.ok) return res.json();
+                    throw new Error(res.statusText);
+                })
+                .then(function handleData(data) {
+                    keyarr[i].cityText = data[0].WeatherText;
+                    keyarr[i].temp = data[0].Temperature.Metric.Value;
+                })
+                .catch(function handleError(error) {
+                    alert(error);
+                });
+        }
+        thisState.setState({ getFavorites: keyarr });
     }
-    thisState.setState({getFavorites: keyarr});
-}
 
 
 }
