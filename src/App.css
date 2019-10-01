@@ -132,7 +132,7 @@ main.weatherForm .form {
 }
 
 .weatherForm {
-  max-width: 60vw;
+  max-width: 71vw;
   margin: 1rem auto;
 }
 
@@ -157,6 +157,9 @@ h2.forecast {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 60vw;
+  margin: 0 auto;
 }
 
 .faveHeart span.rheart {
@@ -179,7 +182,7 @@ h2.forecast {
 
 .card.fifty1 {
   width: 100%;
-  max-width: 30%;
+  max-width: 15rem;
 }
 
 .card.fifty1 > .card-body {
@@ -210,7 +213,7 @@ h2.forecast {
     font-size: 13px;
   }
   .weatherForm input {
-    width: 60vw;
+    width: 100%;
   }
   .dropdown {
     top: -1000px;
