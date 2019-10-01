@@ -1,23 +1,23 @@
-body{
-  font-size:10px;
+body {
+  font-size: 10px;
   box-sizing: border-box;
 }
-* div{
-  font-size:1rem;
+* div {
+  font-size: 1rem;
 }
-.bar{
+.bar {
   display: flex;
   border-bottom: 1px solid #c5bebe;
   margin-bottom: 3rem;
 }
-.bar > ul{
+.bar > ul {
   margin-top: 1rem;
-  margin-right:1.5rem;
+  margin-right: 1.5rem;
   display: flex;
   justify-content: flex-end;
 }
-.bar ul > li{
-  margin-left:1rem;
+.bar ul > li {
+  margin-left: 1rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -25,12 +25,12 @@ span.brand {
   display: flex;
   justify-content: flex-start;
   align-self: center;
-  width:100%;
+  width: 100%;
 }
 .App {
   text-align: left;
-  width:100vw;
-  border:2px solid rgb(139, 250, 144);
+  width: 100vw;
+  border: 2px solid rgb(139, 250, 144);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,19 +55,19 @@ span.brand {
   color: #09d3ac;
 }
 
-.searchForm{
+.searchForm {
   position: relative;
 }
 
-.weatherForm input{
-  width:39vw;
+.weatherForm input {
+  width: 39vw;
 }
-.dropdown{
+.dropdown {
   position: absolute;
-  top:-100px;
+  top: -100px;
   opacity: 1;
   transition: all 0.4s ease;
-  z-index:3;
+  z-index: 3;
   background-color: white;
   display: none;
 }
@@ -86,143 +86,145 @@ span.brand {
   opacity: 1;
   margin: auto;
 }
-.dropdown.open ul{
- padding-left:0.8rem;
- padding-top:.25rem;
+.dropdown.open ul {
+  padding-left: 0.8rem;
+  padding-top: 0.25rem;
 }
-.dropdown.open li{
+.dropdown.open li {
   list-style-type: none;
 }
-.dropdown.open li:hover{
-  background-color: #fabd7e
+.dropdown.open li:hover {
+  background-color: #fabd7e;
 }
-.header{
+.header {
   width: 100%;
-display: flex;
-justify-content: start;
+  display: flex;
+  justify-content: start;
 }
 
-.card{
-  max-width:22%;
+.card {
+  max-width: 22%;
   width: 100%;
-  max-width: 9rem;
-  margin: 1rem;
-}
-
-.card .weather{
   display: inline-flex;
   justify-content: center;
   flex-direction: row;
+  margin: 1rem;
 }
 
-main.weatherForm .form{
+.card.fave {
+  max-width: 13rem;
+}
+.card.weather {
+  max-width: 6rem;
+}
+
+main.weatherForm .form {
   display: flex;
   justify-content: center;
-  margin:1rem 0;
+  margin: 1rem 0;
 }
 
-.wrapper{
+.wrapper {
   display: flex;
-    justify-content: space-around;
-    max-width: 50vw;
-    margin: 1rem auto;
+  justify-content: space-around;
+  max-width: 50vw;
+  margin: 1rem auto;
 }
 
-.weatherForm{
+.weatherForm {
   max-width: 60vw;
-    margin: 1rem auto;
+  margin: 1rem auto;
 }
 
-.footer{
+.footer {
   display: flex;
   justify-content: center;
   position: fixed;
   width: 100%;
   bottom: 0;
-  background-color: rgba(255,255,255,.9);
-  padding:1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
   left: 0;
-  border-top:1px solid #efefef;
+  border-top: 1px solid #efefef;
 }
 
-h2.forecast{
-  text-align:center;
-  margin-bottom:2.5rem;
+h2.forecast {
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
-.divy2{
+.divy2 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
 }
 
-.faveHeart span.rheart{
-  color:red;
+.faveHeart span.rheart {
+  color: red;
 }
-.faveHeart span.gheart{
-  color:#c1c1c1;
+.faveHeart span.gheart {
+  color: #c1c1c1;
 }
-.boxy{
+.boxy {
   font-weight: bold;
-  }  
+}
 
-.faveHeart span:nth-of-type(1){
+.faveHeart span:nth-of-type(1) {
   font-size: 1.4rem;
-  margin:0.5rem;
+  margin: 0.5rem;
 }
-.faveHeart.default{
-  color:#6e6e6e;
+.faveHeart.default {
+  color: #6e6e6e;
 }
 
-.card.fifty1{
+.card.fifty1 {
   width: 100%;
   max-width: 30%;
 }
 
-.card.fifty1 > .card-body{
+.card.fifty1 > .card-body {
   display: flex;
 }
-.card.fifty > .card-body >img{
-  border:1px solid black;
-  padding:1rem;
+.card.fifty > .card-body > img {
+  border: 1px solid black;
+  padding: 1rem;
 }
 
-.extForecast, .faves{
+.extForecast,
+.faves {
   display: flex;
-    width: 100%;
-    max-width: 80vw;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 3rem auto 4rem;
+  width: 100%;
+  max-width: 80vw;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 3rem auto 4rem;
 }
 
-.btn-primary{
-  height:3rem;
+.btn-primary {
+  height: 3rem;
 }
-
-
-
 
 @media screen and (max-width: 1023px) {
-  html, body{
-    font-size:13px;
+  html,
+  body {
+    font-size: 13px;
   }
   .weatherForm input {
     width: 60vw;
   }
-  .dropdown{
-    top:-1000px;
+  .dropdown {
+    top: -1000px;
   }
   .dropdown.open {
     width: 100%;
     max-width: 60vw;
     max-height: 18rem;
   }
-  .dropdown.open li{
+  .dropdown.open li {
     line-height: 2.5;
   }
-  .card{
-    margin-top:.5rem;
+  .card {
+    margin-top: 0.5rem;
     width: 100%;
     max-width: 12rem;
   }
@@ -234,11 +236,12 @@ h2.forecast{
     margin-bottom: 1rem;
     max-width: 100%;
   }
-  .card.fifty1 > .card-body{
+  .card.fifty1 > .card-body {
     flex-direction: column;
     align-items: center;
   }
-  .extForecast, .faves {
+  .extForecast,
+  .faves {
     flex-direction: column;
     align-items: center;
     align-content: space-evenly;

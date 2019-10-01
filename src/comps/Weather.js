@@ -120,7 +120,7 @@ class Weather extends Component {
         })
     }
     handleValue(e) {
-        if (e.keyCode == 8) {
+        if ((e.keyCode == 8) || (this.state.city !== this.state.searchVal)) {
             this.setState({ cityData: [] });
         }
     }

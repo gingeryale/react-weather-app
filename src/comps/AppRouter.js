@@ -6,29 +6,29 @@ import Favorites from './Favorites';
 import NoMatch from './NoMatch';
 
 function AppRouter() {
-    return (
-      <Router>
-        <div>
-          <div className="bar">
-            <span className="brand"><Link to="/">Herolo Weather App</Link></span>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/favorites">Favorites</Link>
-              </li>
-            </ul>
-          </div>
-          <Switch>
+  return (
+    <Router>
+      <div>
+        <div className="bar">
+          <span className="brand"><Link to="/">Weather-Check</Link></span>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/favorites">Favorites</Link>
+            </li>
+          </ul>
+        </div>
+        <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/favorites" exact component={Favorites} />
           <Route component={NoMatch} />
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
+        </Switch>
+      </div>
+    </Router>
+  );
+}
 
 
 

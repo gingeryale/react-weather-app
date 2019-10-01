@@ -14,7 +14,8 @@ if ((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !==
 class Favorites extends Component {
 
     state = {
-        getFavorites: lsFaves
+        getFavorites: lsFaves,
+        ap: `HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob`
     }
 
     componentDidMount() {
@@ -59,7 +60,7 @@ class Favorites extends Component {
 
 
     async updateData() {
-        let appID = `xh0EYFPmBRXURYY0907zmpO4uN3Jtbwj`;
+        let appID = this.state.ap;
         let thisState = this;
         let keyarr = JSON.parse(localStorage.getItem('faves'));
         for (let i = 0; i < keyarr.length; i++) {
