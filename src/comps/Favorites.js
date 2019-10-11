@@ -9,10 +9,7 @@ if ((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !==
     localStorage.setItem("faves", JSON.stringify(lsFaves));
 }
 
-
-
 class Favorites extends Component {
-
     state = {
         getFavorites: lsFaves,
         ap: `HAAYazNoZw7lJ6GX2H5EnD8r0yH8j7Ob`
@@ -25,12 +22,10 @@ class Favorites extends Component {
     }
 
     render() {
-
         let message;
         this.state.getFavorites.length !== 0 ?
             message = (<h5 className="display-4 text-center">Your list of favorites</h5>) :
             message = (<h5 className="display-4 text-center">You have zero favorites, start adding some!</h5>);
-
         return (
             <div>
                 <div>{message}</div>
@@ -60,11 +55,12 @@ class Favorites extends Component {
 
 
     async updateData() {
-        let appID = this.state.ap;
-        let thisState = this;
+        // let appID = this.state.ap;
+        let { ap } = this.state;
+        let self = this;
         let keyarr = JSON.parse(localStorage.getItem('faves'));
         for (let i = 0; i < keyarr.length; i++) {
-            await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + appID)
+            await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + keyarr[i].key + "?apikey=" + ap)
                 .then(res => {
                     if (res.ok) return res.json();
                     throw new Error(res.statusText);
@@ -77,7 +73,7 @@ class Favorites extends Component {
                     alert(error);
                 });
         }
-        thisState.setState({ getFavorites: keyarr });
+        self.setState({ getFavorites: keyarr });
     }
 
 

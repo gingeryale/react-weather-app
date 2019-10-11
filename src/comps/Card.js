@@ -3,19 +3,19 @@ import moment from 'moment';
 
 class Card extends React.Component {
   render() {
-    let date = this.props.day;
+    let { day } = this.props;
     let header;
     this.props.day ?
-      header = (<h5>{moment.unix(date).format('ddd')}</h5>) :
+      header = (<h5>{moment.unix(day).format('ddd')}</h5>) :
       header = (<h4>{this.props.city}</h4>);
-    let condition;
-    this.props.condition ? condition = (<h5>{this.props.condition}</h5>) : condition = (null);
+    let { condition } = this.props;
+    condition ? condition = (<h5>{this.props.condition}</h5>) : condition = (null);
     let removeBTN;
     this.props.condition ?
       removeBTN = (<div><button onClick={this.removeMe.bind(this)} className="btn-sm btn btn-outline-danger">x</button></div>) :
       removeBTN = (null);
-    let location;
-    this.props.locKey ? location = (<span>{this.props.cityDetail}</span>) : location = (null);
+    let { locKey } = this.props;
+    locKey ? locKey = (<span>{this.props.cityDetail}</span>) : locKey = (null);
     let cardCSS;
     this.props.city ? cardCSS = ("card fave") : cardCSS = ("card weather");
     let weatherData;
@@ -26,7 +26,7 @@ class Card extends React.Component {
       <section className={cardCSS} data={this.props.city}>
         <div className="card-body">
           {header}
-          {location}
+          {locKey}
           {weatherData}
           {condition}
           {removeBTN}
@@ -36,11 +36,11 @@ class Card extends React.Component {
   }
 
   removeMe(e) {
-    let _key = this.props.locKey;
+    let { locKey } = this.props;
     let farray = JSON.parse(localStorage.getItem("faves"));
     for (var i = 0; i < farray.length; i++) {
       let elm = farray[i];
-      if (elm.key === _key) {
+      if (elm.key === locKey) {
         farray.splice(i, 1);
       }
     }

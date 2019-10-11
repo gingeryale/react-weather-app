@@ -125,12 +125,11 @@ class Weather extends Component {
             this.setState({ cityData: [] });
         }
     }
-    isFaved(_cityk) {
-        _cityk = this.state.cityKey;
-
+    isFaved() {
+        let { cityKey } = this.state;
         if ((localStorage.getItem('faves') !== "") && (localStorage.getItem('faves') !== null)) {
             var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
-            if (lsFaveArr.filter(el => el.key === _cityk).length > 0) {
+            if (lsFaveArr.filter(el => el.key === cityKey).length > 0) {
                 this.setState({ isFavorite: true });
             } else {
                 this.setState({ isFavorite: false })
@@ -144,31 +143,26 @@ class Weather extends Component {
     }
 
     handleFave(_city, _key, _temp, _unit, _cityText, _cityID) {
-        _city = this.state.searchVal;
-        _key = this.state.cityKey;
-        _temp = this.state.cityTemp;
-        _unit = this.state.unit;
-        _cityText = this.state.cityText;
-        _cityID = this.state.cityID;
+        let { searchVal, cityKey, cityTemp, unit, cityText, cityID } = this.state;
         var prevFaveArray = [...this.state.setFavorites];
-        prevFaveArray.push({ "city": _city, "key": _key, "temp": _temp, "unit": _unit, "cityText": _cityText, "cityID": _cityID });
+        prevFaveArray.push({ "city": searchVal, "key": cityKey, "temp": cityTemp, "unit": unit, "cityText": cityText, "cityID": cityID });
         this.setState({ setFavorites: prevFaveArray });
         if ((localStorage.getItem('faves') == "") || (localStorage.getItem('faves') == null)) {
             localStorage.setItem('faves', JSON.stringify(prevFaveArray));
             this.setState({ isFavorite: true });
         } else {
             var existingStore = JSON.parse(localStorage.getItem("faves"));
-            existingStore.push({ "city": _city, "key": _key, "temp": _temp, "unit": _unit, "cityText": _cityText, "cityID": _cityID });
+            existingStore.push({ "city": searchVal, "key": cityKey, "temp": cityTemp, "unit": unit, "cityText": cityText, "cityID": cityID });
             localStorage.setItem("faves", JSON.stringify(existingStore));
             this.setState({ isFavorite: true });
         }
     }
 
     handleUnFave(_key) {
-        _key = this.state.cityKey;
+        let { cityKey } = this.state;
         var lsFaveArr = JSON.parse(localStorage.getItem('faves'));
         for (let i = 0; i < lsFaveArr.length; i++) {
-            if (lsFaveArr[i].key == _key) {
+            if (lsFaveArr[i].key == cityKey) {
                 lsFaveArr.splice(i, 1);
             }
         }
